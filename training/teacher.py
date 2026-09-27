@@ -83,6 +83,69 @@ _NM_ANCHORS = {
 }
 
 
+# High-volume generated near-miss (v3): MANY sanitizer anchors, each with generated single-edit
+# perturbations, to teach the GENERAL rule "an unknown sanitizer name is not establishably safe".
+# DOMPurify is deliberately EXCLUDED from perturbation here (kept only as a safe anchor) so the
+# frozen bench's DOMPurify single-edits remain a true held-out transfer test — not taught tokens.
+_NM_GEN_ANCHORS = ["sanitizeHtml", "purify.clean", "xssFilter", "cleanHtml", "filterXSS",
+                   "escapeHtml", "sanitizer.sanitize", "domClean", "safeHtml", "scrubHtml"]
+
+
+def _single_edits(name: str, rng, k: int = 8) -> list[str]:
+    alpha = "abcdefghijklmnopqrstuvwxyz"
+    core = name.split(".")[0]  # perturb the identifier part
+    suffix = name[len(core):]
+    out = set()
+    tries = 0
+    while len(out) < k and tries < 200:
+        tries += 1
+        op = rng.integers(0, 4)
+        i = int(rng.integers(0, len(core)))
+        if op == 0 and len(core) > 2:            # deletion
+            w = core[:i] + core[i + 1:]
+        elif op == 1:                             # substitution
+            w = core[:i] + alpha[int(rng.integers(0, 26))] + core[i + 1:]
+        elif op == 2:                             # insertion
+            w = core[:i] + alpha[int(rng.integers(0, 26))] + core[i:]
+        else:                                     # transposition
+            if i < len(core) - 1:
+                w = core[:i] + core[i + 1] + core[i] + core[i + 2:]
+            else:
+                continue
+        if w != core:
+            out.add(w + suffix)
+    return list(out)
+
+
+def _nearmiss_gen_cases(rng) -> list[XSSCase]:
+    out = []
+    # DOMPurify safe anchor (no perturbations of it in training)
+    for ai, anchor in enumerate(["DOMPurify.sanitize"] + _NM_GEN_ANCHORS):
+        out.append(XSSCase(
+            id=f"tm-nmg-anchor-{ai}", language="javascript", family=F.SAFE, vulnerable=False,
+            context=C.DOM_HTML, code=f"const clean = {anchor}(input);\nel.innerHTML = clean;",
+            flow=[FlowNode(R.SOURCE, "input", C.HTML_TEXT),
+                  FlowNode(R.SANITIZER, anchor, C.DOM_HTML, safe=True),
+                  FlowNode(R.SINK, "innerHTML", C.DOM_HTML)],
+            existing_defense=D.SANITIZATION, root_cause="", provenance=_SYN, tags=["train_nearmiss"]))
+        if anchor == "DOMPurify.sanitize":
+            continue  # keep DOMPurify perturbations OUT of training (held-out transfer test)
+        for j, name in enumerate(_single_edits(anchor, rng, k=8)):
+            out.append(XSSCase(
+                id=f"tm-nmg-{ai}-{j}", language="javascript", family=F.DOM, vulnerable=True,
+                context=C.DOM_HTML, code=f"const clean = {name}(input);\nel.innerHTML = clean;",
+                flow=[FlowNode(R.SOURCE, "input", C.HTML_TEXT),
+                      FlowNode(R.SANITIZER, name, C.DOM_HTML, safe=None),
+                      FlowNode(R.SINK, "innerHTML", C.DOM_HTML)],
+                existing_defense=D.NONE,
+                root_cause=f"'{name}' is not a recognized safe sanitizer API; a one-character "
+                           f"difference from a known name does NOT make it trusted, so the innerHTML "
+                           f"sink is vulnerable. Only an exact known-safe sanitizer establishes safety.",
+                remediation="Verify the exact sanitizer API against a trusted list, or use textContent.",
+                provenance=_SYN, tags=["train_nearmiss"]))
+    return out
+
+
 def _nearmiss_train_cases(rng) -> list[XSSCase]:
     """Teach across MULTIPLE anchors: exact known-safe sanitizer -> safe; any look-alike -> NOT
     establishably safe. Multi-anchor coverage is what lets the principle transfer to the held-out
@@ -156,7 +219,9 @@ def build(out_path: str = "data/training/sft.jsonl", n_per_template: int = 12):
     # holdout TEMPLATES, so training stays disjoint from the generalization split.
     base = (casegen.generate(n_per_template=n_per_template, group="train", names="train")
             + casegen.generate(n_per_template=n_per_template, group="train", names="holdout"))
-    nm = _nearmiss_train_cases(rng)
+    # v3: only the generated multi-anchor near-miss set, which EXCLUDES DOMPurify perturbations,
+    # so the frozen bench's DOMPurify single-edits are a genuine held-out transfer test.
+    nm = _nearmiss_gen_cases(rng)
     breadth = _breadth_cases()
     all_cases = base + nm + breadth
 

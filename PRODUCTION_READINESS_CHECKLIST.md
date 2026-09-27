@@ -1,0 +1,25 @@
+# Production Readiness Checklist
+
+- [x] Ontology + provenance schema (source vs synthetic separated)
+- [x] Verified knowledge corpus with references
+- [x] Frozen XSSBench (dev/test-locked/generalization/nearmiss/adversarial), hard negatives
+- [x] Contamination check at freeze; training data hash-disjoint from all splits
+- [x] Baselines measured before specialization (A base, B base+RAG)
+- [x] Retrieval evaluated independently (Recall@K / MRR / nDCG)
+- [x] Teacher SFT grounded in verified labels, all labelled synthetic
+- [x] LoRA training reproducible (dataset hash, base rev, config, seed, runtime)
+- [x] KEV routing gate (frozen zero-shot), raw probs stored, not treated as truth
+- [x] Independent verification (browser oracle: 0 conflicts in scope)
+- [x] Pipeline poisoning suite: 0/15 breaches to training
+- [x] Privacy + injection filters (independent)
+- [x] Frozen promotion gate (does not rubber-stamp: v1 REJECTED)
+- [x] Versioned registry with lineage
+- [x] Rollback without retraining
+- [x] Kill switch (halts learning, keeps inference/audit)
+- [x] Paired-bootstrap significance; locked test read-once discipline
+- [x] Reproducibility manifest
+- [ ] Candidate that clears the full gate (v2 pending)
+- [ ] Real-codebase / repository-level evaluation at scale
+- [ ] Adversarial-evasion detection hardened
+- [ ] Live monitoring dashboard + operated canary
+- [ ] Human-in-the-loop promotion operated in a pilot

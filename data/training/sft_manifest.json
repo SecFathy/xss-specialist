@@ -2,10 +2,10 @@
   "all_synthetic": true,
   "n_breadth": 10,
   "n_dropped_contaminated": 78,
-  "n_nearmiss": 18,
-  "n_records": 286,
-  "n_safe": 141,
-  "n_vulnerable": 145,
-  "sha256": "c1c8f889162997aace7409428754cd7db24293190259cf878ed9d36093e58b37",
+  "n_nearmiss": 91,
+  "n_records": 359,
+  "n_safe": 149,
+  "n_vulnerable": 210,
+  "sha256": "e73b250fc9f573996c7ee464e11dfe6d7038cdbf07dadc1e827dc7688fe5cc08",
   "teacher": "grounded_synthesizer"
 }
