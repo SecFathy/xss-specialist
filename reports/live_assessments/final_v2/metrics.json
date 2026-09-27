@@ -1,0 +1,47 @@
+{
+  "bench": "XSS-LiveBench-v2",
+  "n": 102,
+  "paired_bootstrap_v2_minus_v1": {
+    "ci95": [
+      0.019607843137254832,
+      0.10784313725490191
+    ],
+    "delta_acc": 0.05882352941176472,
+    "n": 102,
+    "v1_acc": 0.9019607843137255,
+    "v2_acc": 0.9607843137254902
+  },
+  "requests_v2": 272,
+  "runtime_s": 275.4,
+  "scope_violations_v2": 0,
+  "v1_emulated": {
+    "accuracy": 0.9019607843137255,
+    "confusion": {
+      "fn": 6,
+      "fp": 4,
+      "tn": 34,
+      "tp": 58
+    },
+    "fnr": 0.09375,
+    "fpr": 0.10526315789473684,
+    "nearmiss_leakage": 0.0,
+    "precision": 0.9354838709677419,
+    "recall": 0.90625,
+    "sanitizer_false_safe": 0.0
+  },
+  "v2": {
+    "accuracy": 0.9607843137254902,
+    "confusion": {
+      "fn": 0,
+      "fp": 4,
+      "tn": 34,
+      "tp": 64
+    },
+    "fnr": 0.0,
+    "fpr": 0.10526315789473684,
+    "nearmiss_leakage": 0.0,
+    "precision": 0.9411764705882353,
+    "recall": 1.0,
+    "sanitizer_false_safe": 0.0
+  }
+}

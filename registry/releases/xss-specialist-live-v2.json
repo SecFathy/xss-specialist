@@ -1,0 +1,113 @@
+{
+  "benchmarks": {
+    "live_v1_local_eval_sha256": "eeb312ab4b9015b65ee4278762505023258193fce8cadbba6eea6892fbe67d1e",
+    "xssbench_manifest_sha256": "841deec1cb6fd7890b54da58ab723a833b22d85e5ddfa480301dc4c72d13bfa4"
+  },
+  "components": {
+    "crawler": {
+      "path": "live/crawler.py",
+      "sha256": "9e16a8cd7eb1624a41452e2de06f2e94c4a2d500a07cba216a94c5f160bb80cf"
+    },
+    "executor": {
+      "path": "live/executor.py",
+      "sha256": "b9cc7716ee6667a8939ae361ad1b30fef7cf1f06c03821d82453cb60944797d5"
+    },
+    "finding_classifier": {
+      "path": "live/findings.py",
+      "sha256": "81f89911f338685085a992e3578621a887641b73ca1b03aac6b975e658a0dff6"
+    },
+    "inference": {
+      "path": "xss_specialist/inference.py",
+      "sha256": "1eef30f29e84774d08dbc3125f95ba210d3b636c165f7aa22144e8ffcc07ba0d"
+    },
+    "input_mapper": {
+      "path": "live/crawler.py",
+      "sha256": "9e16a8cd7eb1624a41452e2de06f2e94c4a2d500a07cba216a94c5f160bb80cf"
+    },
+    "kev_gate": {
+      "path": "kevgate/gate.py",
+      "sha256": "ed58d2f7ebe7ad3d12715222270ea665acd7ab0f9fdf1109a546e26d7779a386"
+    },
+    "oracle": {
+      "path": "verification/browser_oracle.py",
+      "sha256": "e16d31990a6673364d46a0893bad3188b36add889d86a4aa33e45c874154cd7d"
+    },
+    "pipeline": {
+      "path": "live/pipeline.py",
+      "sha256": "ebb0c4a66154d9b20a4bdf53fa7f44203fb04dc01541886217a822e283150b7d"
+    },
+    "probe_planner": {
+      "path": "live/probes.py",
+      "sha256": "947317c5a9b6b49cb05bc5d184c38842529755a90d995a0b053a196697515548"
+    },
+    "prompt": {
+      "path": "xss_specialist/prompt.py",
+      "sha256": "a81dfd1ab141efbd36f1a374ebd3b34f1c97981c872e274eb0012d431f034ee2"
+    },
+    "rag_index": {
+      "path": "retrieval/index.py",
+      "sha256": "945004aef399091610c84f2b12c6274b41e753b19afc8dc7d858edcebc33779b"
+    },
+    "sanitizer_id": {
+      "path": "live/sanitizer_id.py",
+      "sha256": "a74847cff823a9b1961475a7a415faa1c64318f5d0d18ab62bcf796a980ce574"
+    },
+    "schema": {
+      "path": "xss_specialist/schema.py",
+      "sha256": "f9aebe4f4d328829f288359e6313a4ead69e82a25d6a70fe64c7d341c81f574b"
+    },
+    "scope_rules": {
+      "path": "live/scope.py",
+      "sha256": "746b8cf34729badb142bcf738ba7887741b5200bfcc19eead2f999e0b29a127c"
+    },
+    "testapp": {
+      "path": "live/testapp.py",
+      "sha256": "5db9b11903cbcdfafff78a7761bdfb478c8144700de19c9c7be76a8837800de7"
+    }
+  },
+  "env": {
+    "git_commit": "59b8dc26a48316925dbcefa4c6b896f5f099ba9f",
+    "git_dirty": true,
+    "machine": "arm64",
+    "master_seed": 20260927,
+    "packages": {
+      "mlx-lm": "0.31.3",
+      "numpy": "2.5.3",
+      "playwright": "1.63.0",
+      "scikit-learn": "1.9.1",
+      "statsmodels": "0.15.0",
+      "transformers": "5.17.0"
+    },
+    "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "python": "3.13.14"
+  },
+  "extras": {
+    "kev_pin": {
+      "adapter_sha256": "90e817356246e7f18bfa7ca3d31794cd4fbeb3332a66a84cb51d9ceae925f2b2",
+      "base": "Qwen/Qwen3.5-4B-Base",
+      "base_revision": "1001bb4d826a52d1f399e183466143f4da7b741b",
+      "frozen_zeroshot": true,
+      "kev_lib_commit": "6d02f5d066cd34958dfd15ffa5d2f6f0f4c21a63",
+      "kev_lib_repo": "github.com/jaredpalmer/kev",
+      "kev_model_path": "adaptive-ai/models/kev-4b",
+      "release_date": "2026-09-24"
+    },
+    "live_v1_acceptance": {
+      "max_fpr": 0.1,
+      "max_nearmiss_leakage": 0.0,
+      "min_confirmed_exec_accuracy": 0.7,
+      "min_precision": 0.9,
+      "min_recall": 0.85
+    },
+    "sanitizer_db_sha256": "28aebc29660757a8fcb150784f731f41bdf053efcb216902e1e506f1d5f41f04"
+  },
+  "git_commit": "59b8dc26a48316925dbcefa4c6b896f5f099ba9f",
+  "models": {
+    "adapter_v1": "a3bee391984c73c354bf52c6e35de8ac0da7229cda45391387e3f57fb2114c4f",
+    "adapter_v2": "3315642c4e0b22658fd07a7d9141faabe1d07ce252e2d0209b0bbdda5a3c3bb3",
+    "adapter_v3": "649b62eada3b504e3c7d2759d699380354a65fecdbad8fa84f265f7c006137f5",
+    "base_config": "6c6e5116b2714a01cfbc559ddb2608e890c5be4791fdd3f8841b555955439abe"
+  },
+  "release_sha256": "afab7b3b2320275dcda91d488b25d1599391e83c70dc08d7637c1fa385758806",
+  "tag": "xss-specialist-live-v2"
+}
