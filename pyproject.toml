@@ -1,0 +1,32 @@
+[project]
+name = "xss-specialist"
+version = "0.1.0"
+description = "Production-grade XSS specialist SLM with KEV-gated continual learning (research prototype)"
+requires-python = ">=3.12"
+dependencies = [
+    "mlx-lm>=0.28",
+    "numpy>=2.0",
+    "pyyaml>=6.0",
+    "scikit-learn>=1.5",
+    "beautifulsoup4>=4.12",
+    "markdown-it-py>=3.0",
+    "playwright>=1.48",
+    "tabulate>=0.9",
+    "statsmodels>=0.14",
+]
+
+[project.scripts]
+xss = "xss_specialist.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.9,<0.14"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-root = ""
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = ["pytest>=8.0"]

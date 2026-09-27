@@ -1,0 +1,60 @@
+{
+  "env": {
+    "git_commit": null,
+    "git_dirty": true,
+    "machine": "arm64",
+    "master_seed": 20260927,
+    "packages": {
+      "mlx-lm": "0.31.3",
+      "numpy": "2.5.3",
+      "playwright": "1.63.0",
+      "scikit-learn": "1.9.1",
+      "statsmodels": "0.15.0",
+      "transformers": "5.17.0"
+    },
+    "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "python": "3.13.14"
+  },
+  "splits": {
+    "adversarial": {
+      "file": "adversarial.jsonl",
+      "locked": false,
+      "n": 8,
+      "n_safe": 4,
+      "n_vulnerable": 4,
+      "sha256": "c8f48e1fea061c18839c40cd50e491cd79d4679b2038f1771ce97d9549dce254"
+    },
+    "dev": {
+      "file": "dev.jsonl",
+      "locked": false,
+      "n": 68,
+      "n_safe": 37,
+      "n_vulnerable": 31,
+      "sha256": "ebc8b55adb5f58bf242d59834666bd7d2565e98aeb57a0982f1057bafa63378e"
+    },
+    "generalization": {
+      "file": "generalization.jsonl",
+      "locked": false,
+      "n": 42,
+      "n_safe": 21,
+      "n_vulnerable": 21,
+      "sha256": "4dc46c422279e14fa481050b694fec256d08cfdb34e13b16fc7dc57ff36051b7"
+    },
+    "nearmiss": {
+      "file": "nearmiss.jsonl",
+      "locked": false,
+      "n": 37,
+      "n_safe": 1,
+      "n_vulnerable": 36,
+      "sha256": "deb18bcafd7a722bbc5bf8c482468a5e8ced868b3bf4ec94f9ff73033289e179"
+    },
+    "test": {
+      "file": "test.jsonl",
+      "locked": true,
+      "n": 29,
+      "n_safe": 16,
+      "n_vulnerable": 13,
+      "sha256": "36003c20c7c78a4a96ac95951f977970c8d00a6b48ec33b461d6646cab0c3c80"
+    }
+  }
+}
