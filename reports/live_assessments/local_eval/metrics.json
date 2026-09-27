@@ -25,6 +25,6 @@
   "recall": 1.0,
   "requests_made": 26,
   "requests_per_finding": 4.333333333333333,
-  "runtime_per_route_s": 1.23,
-  "runtime_s": 13.5
+  "runtime_per_route_s": 1.24,
+  "runtime_s": 13.7
 }

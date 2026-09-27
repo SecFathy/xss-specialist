@@ -1,0 +1,2 @@
+{"url": "http://example.com/", "final_url": "http://example.com/", "status": 200, "kind": "crawl", "depth": 0, "n": 1}
+{"url": "http://example.com/#xza5bb0c19", "final_url": "http://example.com/#xza5bb0c19", "status": 200, "kind": "marker", "depth": null, "n": 2}

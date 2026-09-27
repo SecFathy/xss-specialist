@@ -1,0 +1,18 @@
+{
+  "allowed_hosts": [
+    "example.com"
+  ],
+  "allowed_prefixes": [
+    "/"
+  ],
+  "allowed_subdomains": [],
+  "auth": {},
+  "base_url": "http://example.com/",
+  "cookies": [],
+  "enable_header_injection": false,
+  "excluded_paths": [],
+  "extra_headers": {},
+  "max_depth": 3,
+  "max_requests": 300,
+  "rate_limit_rps": 5.0
+}

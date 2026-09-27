@@ -1,0 +1,13 @@
+[
+  {
+    "action": "http://127.0.0.1:8099/reflect",
+    "fields": [
+      {
+        "name": "q",
+        "type": "text"
+      }
+    ],
+    "method": "get",
+    "page": "http://127.0.0.1:8099/"
+  }
+]

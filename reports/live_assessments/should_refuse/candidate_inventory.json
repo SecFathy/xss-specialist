@@ -1,0 +1,13 @@
+[
+  {
+    "auth_state": "none",
+    "content_type": "",
+    "context": "unknown",
+    "delivery": "hash",
+    "discovery_source": "dom-source",
+    "input_type": "URL fragment (DOM)",
+    "method": "GET",
+    "param": "#",
+    "url": "http://example.com/"
+  }
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "from": "http://127.0.0.1:8099/",
+    "in_scope": true,
+    "to": "http://127.0.0.1:8099/reflect?q=hello"
+  },
+  {
+    "from": "http://127.0.0.1:8099/",
+    "in_scope": true,
+    "to": "http://127.0.0.1:8099/reflect_attr?q=hello"
+  },
+  {
+    "from": "http://127.0.0.1:8099/",
+    "in_scope": true,
+    "to": "http://127.0.0.1:8099/reflect_js?q=hello"
+  },
+  {
+    "from": "http://127.0.0.1:8099/",
+    "in_scope": true,
+    "to": "http://127.0.0.1:8099/encoded?q=hello"
+  },
+  {
+    "from": "http://127.0.0.1:8099/",
+    "in_scope": true,
+    "to": "http://127.0.0.1:8099/json_script?q=hello"
+  },
+  {
+    "from": "http://127.0.0.1:8099/",
+    "in_scope": true,
+    "to": "http://127.0.0.1:8099/sanitized?q=hello"
+  },
+  {
+    "from": "http://127.0.0.1:8099/",
+    "in_scope": true,
+    "to": "http://127.0.0.1:8099/nearmiss?q=hello"
+  },
+  {
+    "from": "http://127.0.0.1:8099/",
+    "in_scope": true,
+    "to": "http://127.0.0.1:8099/dom?q=hello"
+  },
+  {
+    "from": "http://127.0.0.1:8099/",
+    "in_scope": true,
+    "to": "http://127.0.0.1:8099/dom_safe?q=hello"
+  },
+  {
+    "from": "http://127.0.0.1:8099/",
+    "in_scope": true,
+    "to": "http://127.0.0.1:8099/fp_trap?q=hello"
+  },
+  {
+    "from": "http://127.0.0.1:8099/",
+    "in_scope": true,
+    "to": "http://127.0.0.1:8099/store?q=hello"
+  }
+]

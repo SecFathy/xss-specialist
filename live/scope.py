@@ -25,6 +25,7 @@ class Scope:
     auth: dict = field(default_factory=dict)                      # only when explicitly supplied
     extra_headers: dict = field(default_factory=dict)
     cookies: list[dict] = field(default_factory=list)
+    authorized_external: bool = False   # must be explicitly set to test a non-loopback target
 
     def __post_init__(self):
         host = urlparse(self.base_url).hostname

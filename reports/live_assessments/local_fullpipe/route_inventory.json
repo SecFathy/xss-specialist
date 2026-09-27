@@ -1,0 +1,74 @@
+[
+  {
+    "depth": 0,
+    "final_url": "http://127.0.0.1:8099/",
+    "status": 200,
+    "url": "http://127.0.0.1:8099/"
+  },
+  {
+    "depth": 1,
+    "final_url": "http://127.0.0.1:8099/reflect?q=hello",
+    "status": 200,
+    "url": "http://127.0.0.1:8099/reflect?q=hello"
+  },
+  {
+    "depth": 1,
+    "final_url": "http://127.0.0.1:8099/reflect_attr?q=hello",
+    "status": 200,
+    "url": "http://127.0.0.1:8099/reflect_attr?q=hello"
+  },
+  {
+    "depth": 1,
+    "final_url": "http://127.0.0.1:8099/reflect_js?q=hello",
+    "status": 200,
+    "url": "http://127.0.0.1:8099/reflect_js?q=hello"
+  },
+  {
+    "depth": 1,
+    "final_url": "http://127.0.0.1:8099/encoded?q=hello",
+    "status": 200,
+    "url": "http://127.0.0.1:8099/encoded?q=hello"
+  },
+  {
+    "depth": 1,
+    "final_url": "http://127.0.0.1:8099/json_script?q=hello",
+    "status": 200,
+    "url": "http://127.0.0.1:8099/json_script?q=hello"
+  },
+  {
+    "depth": 1,
+    "final_url": "http://127.0.0.1:8099/sanitized?q=hello",
+    "status": 200,
+    "url": "http://127.0.0.1:8099/sanitized?q=hello"
+  },
+  {
+    "depth": 1,
+    "final_url": "http://127.0.0.1:8099/nearmiss?q=hello",
+    "status": 200,
+    "url": "http://127.0.0.1:8099/nearmiss?q=hello"
+  },
+  {
+    "depth": 1,
+    "final_url": "http://127.0.0.1:8099/dom?q=hello",
+    "status": 200,
+    "url": "http://127.0.0.1:8099/dom?q=hello"
+  },
+  {
+    "depth": 1,
+    "final_url": "http://127.0.0.1:8099/dom_safe?q=hello",
+    "status": 200,
+    "url": "http://127.0.0.1:8099/dom_safe?q=hello"
+  },
+  {
+    "depth": 1,
+    "final_url": "http://127.0.0.1:8099/fp_trap?q=hello",
+    "status": 200,
+    "url": "http://127.0.0.1:8099/fp_trap?q=hello"
+  },
+  {
+    "depth": 1,
+    "final_url": "http://127.0.0.1:8099/store?q=hello",
+    "status": 200,
+    "url": "http://127.0.0.1:8099/store?q=hello"
+  }
+]

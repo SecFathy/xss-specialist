@@ -1,0 +1,7 @@
+[
+  {
+    "from": "http://example.com/",
+    "in_scope": false,
+    "to": "https://iana.org/domains/example"
+  }
+]

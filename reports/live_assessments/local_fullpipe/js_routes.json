@@ -1,0 +1,14 @@
+[
+  "http://127.0.0.1:8099/dom?q",
+  "http://127.0.0.1:8099/dom_safe?q",
+  "http://127.0.0.1:8099/encoded?q",
+  "http://127.0.0.1:8099/fp_trap?q",
+  "http://127.0.0.1:8099/json_script?q",
+  "http://127.0.0.1:8099/nearmiss?q",
+  "http://127.0.0.1:8099/reflect",
+  "http://127.0.0.1:8099/reflect?q",
+  "http://127.0.0.1:8099/reflect_attr?q",
+  "http://127.0.0.1:8099/reflect_js?q",
+  "http://127.0.0.1:8099/sanitized?q",
+  "http://127.0.0.1:8099/store?q"
+]

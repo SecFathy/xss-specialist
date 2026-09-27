@@ -1,0 +1,18 @@
+{
+  "allowed_hosts": [
+    "127.0.0.1"
+  ],
+  "allowed_prefixes": [
+    "/"
+  ],
+  "allowed_subdomains": [],
+  "auth": {},
+  "base_url": "http://127.0.0.1:8099/",
+  "cookies": [],
+  "enable_header_injection": false,
+  "excluded_paths": [],
+  "extra_headers": {},
+  "max_depth": 2,
+  "max_requests": 400,
+  "rate_limit_rps": 50
+}

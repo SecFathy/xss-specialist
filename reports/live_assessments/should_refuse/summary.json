@@ -1,0 +1,14 @@
+{
+  "candidates_tested": 1,
+  "confirmed": 0,
+  "coverage_limitations": "Synthetic/authorized scope only; POST bodies and headers probed only when enabled; execution requiring user interaction (hover/click) may yield LIKELY not CONFIRMED.",
+  "inconclusive": 0,
+  "inputs_discovered": 1,
+  "js_routes_discovered": 0,
+  "likely": 0,
+  "not_vulnerable": 1,
+  "out_of_scope_blocked": 0,
+  "requests_made": 2,
+  "routes_discovered": 1,
+  "target": "http://example.com/"
+}

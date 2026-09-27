@@ -1,0 +1,14 @@
+{
+  "candidates_tested": 24,
+  "confirmed": 6,
+  "coverage_limitations": "Synthetic/authorized scope only; POST bodies and headers probed only when enabled; execution requiring user interaction (hover/click) may yield LIKELY not CONFIRMED.",
+  "inconclusive": 0,
+  "inputs_discovered": 24,
+  "js_routes_discovered": 12,
+  "likely": 1,
+  "not_vulnerable": 17,
+  "out_of_scope_blocked": 0,
+  "requests_made": 52,
+  "routes_discovered": 12,
+  "target": "http://127.0.0.1:8099/"
+}
