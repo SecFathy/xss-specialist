@@ -170,6 +170,36 @@
       "parent": "base",
       "promotion": "rejected",
       "version": "v002"
+    },
+    {
+      "adapter_path": "models/adapters/xss-v3",
+      "adapter_sha256": "649b62eada3b504e3c7d2759d699380354a65fecdbad8fa84f265f7c006137f5",
+      "base_model": "models/qwen3-8b-4bit",
+      "base_revision": "b968826d",
+      "created": 1790523979.976671,
+      "dataset_sha256": "e73b250fc9f573996c7ee464e11dfe6d7038cdbf07dadc1e827dc7688fe5cc08",
+      "deployment": "none",
+      "eval_results": {
+        "F": {
+          "adversarial": {
+            "acc": 0.625
+          },
+          "dev": {
+            "acc": 1.0
+          },
+          "generalization": {
+            "acc": 0.7142857142857143
+          },
+          "nearmiss": {
+            "acc": 0.02702702702702703
+          }
+        }
+      },
+      "kev_revision": "2026-09-24",
+      "notes": "gate REJECT: nearmiss_leakage 1.0 unmoved AND generalization re-narrowed to 0.714 by NM volume",
+      "parent": "base",
+      "promotion": "rejected",
+      "version": "v003"
     }
   ]
 }

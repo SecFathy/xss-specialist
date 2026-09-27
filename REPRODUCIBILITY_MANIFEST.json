@@ -1,4 +1,21 @@
 {
+  "adapters": {
+    "v1": {
+      "adapter_sha256": "a3bee391984c73c354bf52c6e35de8ac0da7229cda45391387e3f57fb2114c4f",
+      "runtime_s": 768.2,
+      "sft_sha256": "5e3829837b76f2896b654bc0d311c4283c27b5c20ec4c382bd54b50cea2995aa"
+    },
+    "v2": {
+      "adapter_sha256": "3315642c4e0b22658fd07a7d9141faabe1d07ce252e2d0209b0bbdda5a3c3bb3",
+      "runtime_s": 793.1,
+      "sft_sha256": "c1c8f889162997aace7409428754cd7db24293190259cf878ed9d36093e58b37"
+    },
+    "v3": {
+      "adapter_sha256": "649b62eada3b504e3c7d2759d699380354a65fecdbad8fa84f265f7c006137f5",
+      "runtime_s": 931.0,
+      "sft_sha256": "e73b250fc9f573996c7ee464e11dfe6d7038cdbf07dadc1e827dc7688fe5cc08"
+    }
+  },
   "components": {
     "corpus_sha256": "18b0de1e139ecf6424f9417d81f15662dfe8ee0a5a6fbbe14e4d44472a02e250",
     "kev": {
@@ -39,5 +56,15 @@
     "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
     "python": "3.13.14"
   },
-  "master_seed": 20260927
+  "master_seed": 20260927,
+  "registry": {
+    "all": "rejected",
+    "current": null,
+    "locked_test": "UNREAD (no PROMOTE)",
+    "versions": [
+      "v001",
+      "v002",
+      "v003"
+    ]
+  }
 }
