@@ -1,0 +1,10 @@
+{
+  "all_synthetic": true,
+  "n_dropped_contaminated": 78,
+  "n_nearmiss": 6,
+  "n_records": 264,
+  "n_safe": 134,
+  "n_vulnerable": 130,
+  "sha256": "5e3829837b76f2896b654bc0d311c4283c27b5c20ec4c382bd54b50cea2995aa",
+  "teacher": "grounded_synthesizer"
+}

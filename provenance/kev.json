@@ -1,0 +1,10 @@
+{
+  "adapter_sha256": "90e817356246e7f18bfa7ca3d31794cd4fbeb3332a66a84cb51d9ceae925f2b2",
+  "base": "Qwen/Qwen3.5-4B-Base",
+  "base_revision": "1001bb4d826a52d1f399e183466143f4da7b741b",
+  "frozen_zeroshot": true,
+  "kev_lib_commit": "6d02f5d066cd34958dfd15ffa5d2f6f0f4c21a63",
+  "kev_lib_repo": "github.com/jaredpalmer/kev",
+  "kev_model_path": "adaptive-ai/models/kev-4b",
+  "release_date": "2026-09-24"
+}

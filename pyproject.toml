@@ -13,6 +13,9 @@ dependencies = [
     "playwright>=1.48",
     "tabulate>=0.9",
     "statsmodels>=0.14",
+    "peft>=0.21.0",
+    "pydantic>=2.13.5",
+    "fastapi>=0.141.1",
 ]
 
 [project.scripts]
