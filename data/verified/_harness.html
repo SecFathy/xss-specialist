@@ -12,7 +12,7 @@ slot = document.getElementById('out');
 view = document.getElementById('out');
 function $(sel){var n=document.getElementById('out');return {html:function(v){n.innerHTML=v;},text:function(v){n.textContent=v;}};}
 try {
-const author = window.name;
-slot.insertAdjacentText('beforeend', author);
+const param = new URLSearchParams(location.search).get('q');
+document.write(param);
 } catch(e) { window.__xss_err = String(e); }
 </script></body></html>

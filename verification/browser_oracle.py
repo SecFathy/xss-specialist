@@ -108,6 +108,77 @@ def verify_dom_case(case: dict, payload: str = PAYLOAD, timeout_ms: int = 3000) 
             "scope": "in_scope", "js_error": err}
 
 
+def run_probe_on_url(url: str, marker: str, delivery: str = "query", param: str = "q",
+                     timeout_ms: int = 4000, extra_headers: dict | None = None,
+                     cookies: list | None = None, raw_signature: str = "") -> dict:
+    """AUTHORITATIVE live execution check. Navigates a real (in-scope) URL with the probe already
+    embedded in `url`, installs a per-marker sentinel (window.__X), and reports what the BROWSER
+    actually did: reflection in HTML source, reflection in the live DOM, whether execution fired
+    (window.__X[marker] set), console messages, final URL and status. The LLM is never consulted.
+
+    Non-destructive: it only reads flags/DOM/console. It does not click through, submit unrelated
+    forms, or leave the given URL.
+    """
+    try:
+        from playwright.sync_api import sync_playwright
+    except Exception as e:
+        return {"executed": None, "error": f"playwright_unavailable:{e}"}
+
+    result = {"requested_url": url, "final_url": None, "status": None,
+              "reflected_html": False, "reflected_dom": False, "executed": False,
+              "raw_reflected": False, "console": [], "marker": marker}
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        try:
+            context = browser.new_context(extra_http_headers=extra_headers or {})
+            if cookies:
+                try:
+                    context.add_cookies(cookies)
+                except Exception:
+                    pass
+            page = context.new_page()
+            page.add_init_script("window.__X = window.__X || {};")
+            msgs = []
+            page.on("console", lambda m: msgs.append({"type": m.type, "text": m.text[:300]}))
+            resp = page.goto(url, wait_until="load", timeout=timeout_ms)
+            page.wait_for_timeout(250)
+            result["status"] = resp.status if resp else None
+            result["final_url"] = page.url
+            try:
+                # RAW server response body — reflection/encoding must be judged on what the server
+                # actually sent, not on the browser-normalized DOM (which re-quotes attributes etc.).
+                try:
+                    raw_body = resp.text() if resp else ""
+                except Exception:
+                    raw_body = ""
+                dom_txt = page.evaluate("document.documentElement.outerHTML")
+                result["reflected_html"] = marker in raw_body
+                result["reflected_dom"] = marker in dom_txt
+                result["executed"] = bool(page.evaluate(f"!!(window.__X && window.__X['{marker}'])"))
+                # dangerous signature must survive UNENCODED (and not backslash-escaped) in the raw
+                # body, or be present in the live DOM, to be considered live.
+                if raw_signature:
+                    def _unescaped(body, sig):
+                        i = body.find(sig)
+                        while i >= 0:
+                            if i == 0 or body[i - 1] != "\\":
+                                return True
+                            i = body.find(sig, i + 1)
+                        return False
+                    result["raw_reflected"] = _unescaped(raw_body, raw_signature) or _unescaped(dom_txt, raw_signature)
+                # surrounding source window around the marker (raw body preferred), for context class.
+                src_for_ctx = raw_body if marker in raw_body else (dom_txt if marker in dom_txt else "")
+                if src_for_ctx:
+                    j = src_for_ctx.find(marker)
+                    result["context_window"] = src_for_ctx[max(0, j - 90):j + len(marker) + 40]
+            except Exception as e:
+                result["error"] = str(e)
+            result["console"] = msgs[:20]
+        finally:
+            browser.close()
+    return result
+
+
 def verify_split(split_path: str, limit: int | None = None) -> dict:
     recs = [json.loads(l) for l in Path(split_path).read_text().splitlines() if l.strip()]
     if limit:

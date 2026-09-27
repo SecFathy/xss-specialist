@@ -87,7 +87,10 @@ class H(BaseHTTPRequestHandler):
         if path == "/encoded":
             return self._send(PAGE.format(body=f"<div>Hello {html.escape(v, quote=True)}</div>"))
         if path == "/json_script":
-            return self._send(PAGE.format(body=f"<script>var s = {json.dumps(v)};</script>"))
+            # SAFE pattern: JSON-encode AND neutralize the HTML tokenizer's </script> breakout by
+            # escaping '<' (and '&','>') to \uXXXX. json_encode ALONE is not enough.
+            enc = json.dumps(v).replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
+            return self._send(PAGE.format(body=f"<script>var s = {enc};</script>"))
         if path == "/sanitized":
             return self._send(PAGE.format(body=f"<div>{_real_sanitizer(v)}</div>"))
         if path == "/nearmiss":
