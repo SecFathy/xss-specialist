@@ -1,0 +1,14 @@
+{
+  "crawl_requests": 104,
+  "duplicate_rate": 0.0,
+  "gt_routes": 102,
+  "input_recall": 1.0,
+  "inputs_discovered": 206,
+  "js_routes_discovered": 102,
+  "max_depth": 2,
+  "missed_routes": [],
+  "out_of_scope_blocked": 0,
+  "route_recall": 1.0,
+  "routes_discovered": 104,
+  "runtime_s": 1.7
+}

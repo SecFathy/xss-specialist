@@ -1,0 +1,10 @@
+{
+  "bottleneck": "browser navigation + execution dominates (~1.2-1.5 s/case); network/model are not on the per-candidate hot path",
+  "browser_nav_ms_cold": 845.9,
+  "kev_latency_note": "~2-3 s/item (Kev-4B DeltaNet on MLX); offline consolidation path only, NOT on the assessment hot path",
+  "livebench_runtime_s": 152.5,
+  "rag_retrieve_ms": 0.5,
+  "requests_made": 272,
+  "requests_per_finding": 4.0,
+  "runtime_per_case_s": 1.5
+}

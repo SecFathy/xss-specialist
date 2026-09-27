@@ -1,0 +1,24 @@
+{
+  "accuracy_by_confidence_bucket": {
+    "0.6": {
+      "accuracy": 0.5,
+      "n": 8
+    },
+    "0.9": {
+      "accuracy": 1.0,
+      "n": 34
+    },
+    "1.0": {
+      "accuracy": 1.0,
+      "n": 60
+    }
+  },
+  "brier": 0.0225843137254902,
+  "ece": 0.04117647058823529,
+  "mean_false_positive_confidence": 0.6,
+  "mean_false_safe_confidence": null,
+  "n": 102,
+  "n_false_positive": 4,
+  "n_false_safe": 0,
+  "note": "System confidence from finding status; browser CONFIRMED never overridden by LLM."
+}

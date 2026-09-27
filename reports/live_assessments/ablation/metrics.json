@@ -1,0 +1,51 @@
+{
+  "E1_reflection_only": {
+    "fn": 3,
+    "fp": 37,
+    "fpr": 0.9736842105263158,
+    "precision": 0.6224489795918368,
+    "recall": 0.953125,
+    "tn": 1,
+    "tp": 61
+  },
+  "E2_raw_unencoded": {
+    "fn": 38,
+    "fp": 4,
+    "fpr": 0.10526315789473684,
+    "precision": 0.8666666666666667,
+    "recall": 0.40625,
+    "tn": 34,
+    "tp": 26
+  },
+  "E3_oracle_execution": {
+    "fn": 0,
+    "fp": 4,
+    "fpr": 0.10526315789473684,
+    "precision": 0.9411764705882353,
+    "recall": 1.0,
+    "tn": 34,
+    "tp": 64
+  },
+  "E4_interaction_aware": {
+    "fn": 0,
+    "fp": 4,
+    "fpr": 0.10526315789473684,
+    "precision": 0.9411764705882353,
+    "recall": 1.0,
+    "tn": 34,
+    "tp": 64
+  },
+  "E5_full_identity": {
+    "fn": 0,
+    "fp": 4,
+    "fpr": 0.10526315789473684,
+    "precision": 0.9411764705882353,
+    "recall": 1.0,
+    "tn": 34,
+    "tp": 64
+  },
+  "_interaction_contribution": {
+    "confirmed_passive": 58,
+    "confirmed_via_interaction": 2
+  }
+}

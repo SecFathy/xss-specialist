@@ -79,15 +79,15 @@
       "tp": 21
     },
     "stored": {
-      "fn": 2,
-      "fnr": 1.0,
+      "fn": 0,
+      "fnr": 0.0,
       "fp": 0,
       "fpr": null,
       "n": 2,
-      "precision": null,
-      "recall": 0.0,
+      "precision": 1.0,
+      "recall": 1.0,
       "tn": 0,
-      "tp": 0
+      "tp": 2
     }
   },
   "by_context": {
@@ -147,15 +147,15 @@
       "tp": 2
     },
     "html_text": {
-      "fn": 2,
-      "fnr": 0.4,
+      "fn": 0,
+      "fnr": 0.0,
       "fp": 3,
       "fpr": 0.15,
       "n": 25,
-      "precision": 0.5,
-      "recall": 0.6,
+      "precision": 0.625,
+      "recall": 1.0,
       "tn": 17,
-      "tp": 3
+      "tp": 5
     },
     "js_code": {
       "fn": 0,
@@ -215,49 +215,48 @@
       "tp": 0
     },
     "stored": {
-      "fn": 2,
-      "fnr": 1.0,
+      "fn": 0,
+      "fnr": 0.0,
       "fp": 0,
       "fpr": null,
       "n": 2,
-      "precision": null,
-      "recall": 0.0,
+      "precision": 1.0,
+      "recall": 1.0,
       "tn": 0,
-      "tp": 0
+      "tp": 2
     }
   },
   "coverage_funnel": {
-    "CONFIRMED": 58,
+    "CONFIRMED": 60,
     "LIKELY": 8,
     "execution_attempted": 102,
     "inputs_analyzed": 102,
     "inputs_probed": 102,
-    "reflections_observed": 96
+    "reflections_observed": 98
   },
   "failure_matrix": {
-    "CONTEXT_CLASSIFICATION_ERROR": 4,
-    "PROBE_GENERATION_ERROR": 2
+    "CONTEXT_CLASSIFICATION_ERROR": 4
   },
   "n": 102,
   "overall": {
-    "confirmed_exec_accuracy": 0.90625,
-    "context_accuracy": 0.78125,
-    "fn": 2,
-    "fnr": 0.03125,
+    "confirmed_exec_accuracy": 0.9375,
+    "context_accuracy": 0.8125,
+    "fn": 0,
+    "fnr": 0.0,
     "fp": 4,
     "fpr": 0.10526315789473684,
     "n": 102,
     "nearmiss_cases": 21,
     "nearmiss_leakage": 0.0,
-    "precision": 0.9393939393939394,
-    "recall": 0.96875,
+    "precision": 0.9411764705882353,
+    "recall": 1.0,
     "sanitizer_false_safe_rate": 0.0,
     "tn": 34,
-    "tp": 62
+    "tp": 64
   },
-  "requests_made": 274,
-  "requests_per_finding": 4.151515151515151,
-  "runtime_per_case_s": 1.47,
-  "runtime_s": 150.3,
+  "requests_made": 272,
+  "requests_per_finding": 4.0,
+  "runtime_per_case_s": 1.5,
+  "runtime_s": 152.5,
   "spec_sha256": "a763e254d2d23f8b47b857a014d2aeec8d4180c2a1d5d440267a48bb2f5ff56e"
 }
