@@ -1,0 +1,44 @@
+[
+  {
+    "action": "https://0a440055033904578164c086002b003f.web-security-academy.net/",
+    "fields": [
+      {
+        "name": "search",
+        "type": "text"
+      }
+    ],
+    "method": "get",
+    "page": "https://0a440055033904578164c086002b003f.web-security-academy.net/"
+  },
+  {
+    "action": "https://0a440055033904578164c086002b003f.web-security-academy.net/post/comment",
+    "fields": [
+      {
+        "name": "csrf",
+        "type": "hidden"
+      },
+      {
+        "name": "postId",
+        "type": "hidden"
+      },
+      {
+        "name": "comment",
+        "type": "text"
+      },
+      {
+        "name": "name",
+        "type": "text"
+      },
+      {
+        "name": "email",
+        "type": "email"
+      },
+      {
+        "name": "website",
+        "type": "text"
+      }
+    ],
+    "method": "post",
+    "page": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=3"
+  }
+]

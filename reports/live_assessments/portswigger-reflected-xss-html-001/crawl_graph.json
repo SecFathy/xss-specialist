@@ -1,0 +1,77 @@
+[
+  {
+    "from": "https://0a440055033904578164c086002b003f.web-security-academy.net/",
+    "in_scope": false,
+    "to": "https://portswigger.net/web-security/cross-site-scripting/reflected/lab-html-context-nothing-encoded"
+  },
+  {
+    "from": "https://0a440055033904578164c086002b003f.web-security-academy.net/",
+    "in_scope": true,
+    "to": "https://0a440055033904578164c086002b003f.web-security-academy.net/"
+  },
+  {
+    "from": "https://0a440055033904578164c086002b003f.web-security-academy.net/",
+    "in_scope": true,
+    "to": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=3"
+  },
+  {
+    "from": "https://0a440055033904578164c086002b003f.web-security-academy.net/",
+    "in_scope": true,
+    "to": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=3"
+  },
+  {
+    "from": "https://0a440055033904578164c086002b003f.web-security-academy.net/",
+    "in_scope": true,
+    "to": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=4"
+  },
+  {
+    "from": "https://0a440055033904578164c086002b003f.web-security-academy.net/",
+    "in_scope": true,
+    "to": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=4"
+  },
+  {
+    "from": "https://0a440055033904578164c086002b003f.web-security-academy.net/",
+    "in_scope": true,
+    "to": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=2"
+  },
+  {
+    "from": "https://0a440055033904578164c086002b003f.web-security-academy.net/",
+    "in_scope": true,
+    "to": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=2"
+  },
+  {
+    "from": "https://0a440055033904578164c086002b003f.web-security-academy.net/",
+    "in_scope": true,
+    "to": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=1"
+  },
+  {
+    "from": "https://0a440055033904578164c086002b003f.web-security-academy.net/",
+    "in_scope": true,
+    "to": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=1"
+  },
+  {
+    "from": "https://0a440055033904578164c086002b003f.web-security-academy.net/",
+    "in_scope": true,
+    "to": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=5"
+  },
+  {
+    "from": "https://0a440055033904578164c086002b003f.web-security-academy.net/",
+    "in_scope": true,
+    "to": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=5"
+  },
+  {
+    "from": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=3",
+    "in_scope": false,
+    "to": "https://portswigger.net/web-security/cross-site-scripting/reflected/lab-html-context-nothing-encoded"
+  },
+  {
+    "from": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=3",
+    "in_scope": true,
+    "to": "https://0a440055033904578164c086002b003f.web-security-academy.net/"
+  },
+  {
+    "from": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=3",
+    "in_scope": true,
+    "to": "https://0a440055033904578164c086002b003f.web-security-academy.net/"
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "target": "https://0a440055033904578164c086002b003f.web-security-academy.net/",
+  "operator_identity": "SecFathy",
+  "assessment_id": "portswigger-reflected-xss-html-001",
+  "authorization_acknowledged": true,
+  "allowed_hosts": [],
+  "allowed_subdomains": [],
+  "allowed_prefixes": [
+    "/"
+  ],
+  "excluded_paths": [
+    "/logout"
+  ],
+  "request_budget": 60,
+  "rate_limit_rps": 2.0,
+  "auth_config": {},
+  "allowed_test_classes": [
+    "reflected",
+    "dom"
+  ],
+  "stored_xss_permitted": false
+}

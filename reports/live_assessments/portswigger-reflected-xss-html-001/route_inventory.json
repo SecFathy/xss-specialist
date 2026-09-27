@@ -1,0 +1,14 @@
+[
+  {
+    "depth": 0,
+    "final_url": "https://0a440055033904578164c086002b003f.web-security-academy.net/",
+    "status": 200,
+    "url": "https://0a440055033904578164c086002b003f.web-security-academy.net/"
+  },
+  {
+    "depth": 1,
+    "final_url": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=3",
+    "status": 200,
+    "url": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=3"
+  }
+]

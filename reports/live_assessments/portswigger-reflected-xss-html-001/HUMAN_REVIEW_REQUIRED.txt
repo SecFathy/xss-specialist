@@ -1,0 +1,1 @@
+Every finding requires human review before disclosure/action. Live findings are quarantine-only and MUST NOT auto-train the specialist.

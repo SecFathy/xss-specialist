@@ -1,0 +1,21 @@
+{
+  "allowed_hosts": [
+    "0a440055033904578164c086002b003f.web-security-academy.net"
+  ],
+  "allowed_prefixes": [
+    "/"
+  ],
+  "allowed_subdomains": [],
+  "auth": {},
+  "authorized_external": true,
+  "base_url": "https://0a440055033904578164c086002b003f.web-security-academy.net/",
+  "cookies": [],
+  "enable_header_injection": false,
+  "excluded_paths": [
+    "/logout"
+  ],
+  "extra_headers": {},
+  "max_depth": 3,
+  "max_requests": 60,
+  "rate_limit_rps": 2.0
+}

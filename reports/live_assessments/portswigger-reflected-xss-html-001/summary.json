@@ -1,0 +1,14 @@
+{
+  "candidates_tested": 10,
+  "confirmed": 1,
+  "coverage_limitations": "Synthetic/authorized scope only; POST bodies and headers probed only when enabled; execution requiring user interaction (hover/click) may yield LIKELY not CONFIRMED.",
+  "inconclusive": 0,
+  "inputs_discovered": 10,
+  "js_routes_discovered": 2,
+  "likely": 0,
+  "not_vulnerable": 9,
+  "out_of_scope_blocked": 0,
+  "requests_made": 22,
+  "routes_discovered": 2,
+  "target": "https://0a440055033904578164c086002b003f.web-security-academy.net/"
+}

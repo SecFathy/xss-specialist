@@ -1,0 +1,112 @@
+[
+  {
+    "auth_state": "none",
+    "content_type": "",
+    "context": "unknown",
+    "delivery": "query",
+    "discovery_source": "crawl-link",
+    "input_type": "GET parameter",
+    "method": "GET",
+    "param": "postId",
+    "url": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=3"
+  },
+  {
+    "auth_state": "none",
+    "content_type": "",
+    "context": "unknown",
+    "delivery": "query",
+    "discovery_source": "form",
+    "input_type": "GET parameter",
+    "method": "GET",
+    "param": "search",
+    "url": "https://0a440055033904578164c086002b003f.web-security-academy.net/"
+  },
+  {
+    "auth_state": "none",
+    "content_type": "",
+    "context": "unknown",
+    "delivery": "form",
+    "discovery_source": "form",
+    "input_type": "POST form field",
+    "method": "POST",
+    "param": "csrf",
+    "url": "https://0a440055033904578164c086002b003f.web-security-academy.net/post/comment"
+  },
+  {
+    "auth_state": "none",
+    "content_type": "",
+    "context": "unknown",
+    "delivery": "form",
+    "discovery_source": "form",
+    "input_type": "POST form field",
+    "method": "POST",
+    "param": "postId",
+    "url": "https://0a440055033904578164c086002b003f.web-security-academy.net/post/comment"
+  },
+  {
+    "auth_state": "none",
+    "content_type": "",
+    "context": "unknown",
+    "delivery": "form",
+    "discovery_source": "form",
+    "input_type": "POST form field",
+    "method": "POST",
+    "param": "comment",
+    "url": "https://0a440055033904578164c086002b003f.web-security-academy.net/post/comment"
+  },
+  {
+    "auth_state": "none",
+    "content_type": "",
+    "context": "unknown",
+    "delivery": "form",
+    "discovery_source": "form",
+    "input_type": "POST form field",
+    "method": "POST",
+    "param": "name",
+    "url": "https://0a440055033904578164c086002b003f.web-security-academy.net/post/comment"
+  },
+  {
+    "auth_state": "none",
+    "content_type": "",
+    "context": "unknown",
+    "delivery": "form",
+    "discovery_source": "form",
+    "input_type": "POST form field",
+    "method": "POST",
+    "param": "email",
+    "url": "https://0a440055033904578164c086002b003f.web-security-academy.net/post/comment"
+  },
+  {
+    "auth_state": "none",
+    "content_type": "",
+    "context": "unknown",
+    "delivery": "form",
+    "discovery_source": "form",
+    "input_type": "POST form field",
+    "method": "POST",
+    "param": "website",
+    "url": "https://0a440055033904578164c086002b003f.web-security-academy.net/post/comment"
+  },
+  {
+    "auth_state": "none",
+    "content_type": "",
+    "context": "unknown",
+    "delivery": "hash",
+    "discovery_source": "dom-source",
+    "input_type": "URL fragment (DOM)",
+    "method": "GET",
+    "param": "#",
+    "url": "https://0a440055033904578164c086002b003f.web-security-academy.net/"
+  },
+  {
+    "auth_state": "none",
+    "content_type": "",
+    "context": "unknown",
+    "delivery": "hash",
+    "discovery_source": "dom-source",
+    "input_type": "URL fragment (DOM)",
+    "method": "GET",
+    "param": "#",
+    "url": "https://0a440055033904578164c086002b003f.web-security-academy.net/post?postId=3"
+  }
+]
