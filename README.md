@@ -31,6 +31,7 @@ browser oracle turn its reasoning into evidence-backed, hard-to-fool findings?*
 - [The one-paragraph version](#the-one-paragraph-version)
 - [Why this exists](#why-this-exists)
 - [Two systems, one repo](#two-systems-one-repo)
+- [Kev-style XSS decision model](#kev-style-xss-decision-model)
 - [Headline results](#headline-results)
 - [The research: KEV-gated continual learning](#the-research-kev-gated-continual-learning)
 - [The live system: execution-authoritative assessment](#the-live-system-execution-authoritative-assessment)
@@ -114,6 +115,25 @@ This project takes the opposite stance:
 **Separation of concerns is the whole design:** KEV decides *routing*, verification decides *trust*,
 RAG holds *volatile* knowledge, training holds *stable reusable* knowledge, evaluation decides
 *acceptance*, and deployment controls decide *reach*. No component is the "truth engine."
+
+---
+
+## Kev-style XSS decision model
+
+The next model interface is a compact decision model: one code state, independent typed questions,
+and calibrated probabilities for vulnerability, XSS family, execution context, defenses, and the
+need for browser verification. It does not generate a free-form verdict and it can never declare a
+finding `CONFIRMED`; browser execution remains authoritative.
+
+The API and dataset converter are usable now with a clearly labeled, non-learned reference backend:
+
+```bash
+uv run xss-decision-data
+uv run xss-decision-serve --port 8009
+```
+
+See [`docs/DECISION_MODEL.md`](docs/DECISION_MODEL.md) for the request format, example client call,
+current status, and learned pointer-model milestones.
 
 ---
 
