@@ -53,3 +53,38 @@ def test_verified_safe_sanitizer_downgrades_but_unknown_does_not():
     uk = verify_identity("DOMPvrify.sanitize")
     f2 = correlate(cand, marker_ev, [{"executed": False, "raw_reflected": True}], uk, "F")
     assert f2.status == LIKELY             # near-miss must NOT grant safety
+
+
+def test_pilot_refuses_without_acknowledgement():
+    from live.pilot import PilotAuthorization, authorize
+    a = PilotAuthorization(target="http://192.0.2.9/", operator_identity="op",
+                           assessment_id="x", authorization_acknowledged=False)
+    try:
+        authorize(a, authorized_external=True)
+        assert False
+    except SystemExit:
+        pass
+
+
+def test_pilot_refuses_external_without_flag():
+    from live.pilot import PilotAuthorization, authorize
+    a = PilotAuthorization(target="http://192.0.2.9/", operator_identity="op",
+                           assessment_id="x", authorization_acknowledged=True)
+    try:
+        authorize(a, authorized_external=False)
+        assert False
+    except SystemExit:
+        pass
+
+
+def test_js_code_probe_is_nondestructive():
+    from live.probes import js_code_probe
+    p = js_code_probe("query")
+    assert p.kind == "exec" and "window.__X" in p.payload and "<" not in p.payload
+
+
+def test_classify_quoted_vs_unquoted():
+    from live.pipeline import classify_context
+    q = classify_context('<input value="MARK', "MARK")
+    u = classify_context('<div class=MARK', "MARK")
+    assert q == "html_attr" and u == "html_attr_unquoted"

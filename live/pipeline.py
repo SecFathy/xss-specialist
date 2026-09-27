@@ -45,8 +45,15 @@ def classify_context(html_src: str, marker: str) -> str:
     return "html_text"
 
 
-def assess_candidate(candidate: dict, enforcer, fid: str, timeout_ms: int = 4000) -> dict:
-    """Full per-candidate flow. Returns {finding, marker_ev, exec_evs}."""
+def assess_candidate(candidate: dict, enforcer, fid: str, timeout_ms: int = 4000,
+                     caps: dict | None = None) -> dict:
+    """Full per-candidate flow. Returns {finding, marker_ev, exec_evs}.
+    caps (all default True) toggle v2 capabilities for ablation/baseline emulation:
+    interactions, js_code_probe, quoted_split."""
+    caps = caps or {}
+    cap_interactions = caps.get("interactions", True)
+    cap_jscode = caps.get("js_code_probe", True)
+    cap_quoted_split = caps.get("quoted_split", True)
     # 1) marker probe
     mp = plan(candidate, "marker")[0]
     marker_ev = execute(candidate, mp, enforcer, timeout_ms)
@@ -60,6 +67,8 @@ def assess_candidate(candidate: dict, enforcer, fid: str, timeout_ms: int = 4000
         else:
             win = marker_ev.get("context_window", "")
             ctx = classify_context(win, mp.marker) if win else "html_text"
+            if not cap_quoted_split and ctx == "html_attr_unquoted":
+                ctx = "html_attr"   # v1 did not distinguish quoted vs unquoted
         candidate = {**candidate, "context": ctx}
 
     # 3) derive bounded interactions from the reflection context (Phase 3)
@@ -78,7 +87,7 @@ def assess_candidate(candidate: dict, enforcer, fid: str, timeout_ms: int = 4000
             acts = ["hover", "focus", "click"]
         elif ctx in ("dom_html", "dom_attr"):
             acts = ["hashnav"]
-        candidate = {**candidate, "interactions": acts}
+        candidate = {**candidate, "interactions": acts if cap_interactions else []}
 
     # 4) execution probes
     exec_evs = []
@@ -91,7 +100,7 @@ def assess_candidate(candidate: dict, enforcer, fid: str, timeout_ms: int = 4000
     # code sinks (eval/Function/string-timer/script-element/event-handler) consume input as CODE and
     # never reflect it — try a harmless JS-execution probe for DOM/query candidates even if nothing
     # reflected. Confirmation is by the sentinel only.
-    if not any(e.get("executed") for e in exec_evs):
+    if cap_jscode and not any(e.get("executed") for e in exec_evs):
         from live.probes import js_code_probe
         jp = js_code_probe(candidate.get("delivery", "query"))
         je = execute(candidate, jp, enforcer, timeout_ms)
