@@ -4,7 +4,7 @@
 
 # xss-specialist
 
-### A KEV-gated continual-learning XSS specialist SLM **+** an execution-authoritative live assessment system
+### A Kev-style XSS decision model **+** an execution-authoritative live assessment system
 
 *Can a small language model become a deep XSS expert through gated continual learning — and can a
 browser oracle turn its reasoning into evidence-backed, hard-to-fool findings?*
@@ -13,7 +13,7 @@ browser oracle turn its reasoning into evidence-backed, hard-to-fool findings?*
 
 ![status](https://img.shields.io/badge/status-research%20prototype-blue)
 ![readiness](https://img.shields.io/badge/live%20system-AUTHORIZED%20PILOT%20READY-orange)
-![tests](https://img.shields.io/badge/tests-22%2F22%20passing-brightgreen)
+![tests](https://img.shields.io/badge/tests-26%2F26%20passing-brightgreen)
 ![license](https://img.shields.io/badge/license-Apache--2.0-lightgrey)
 ![use](https://img.shields.io/badge/use-authorized%20testing%20only-red)
 
@@ -120,12 +120,21 @@ RAG holds *volatile* knowledge, training holds *stable reusable* knowledge, eval
 
 ## Kev-style XSS decision model
 
-The next model interface is a compact decision model: one code state, independent typed questions,
-and calibrated probabilities for vulnerability, XSS family, execution context, defenses, and the
-need for browser verification. It does not generate a free-form verdict and it can never declare a
-finding `CONFIRMED`; browser execution remains authoritative.
+The project now includes the foundation for a compact XSS decision model: one code state,
+independent typed questions, and probability distributions for vulnerability, XSS family, execution
+context, defenses, and the need for browser verification. It does not generate a free-form verdict
+and it can never declare a finding `CONFIRMED`; browser execution remains authoritative.
 
-The API and dataset converter are usable now with a clearly labeled, non-learned reference backend:
+| Component | Status |
+|---|---|
+| Typed `noul`, `choice`, and `score` API | Available |
+| Frozen-benchmark decision-data converter | Available |
+| Local `/v1/systemone` server | Available |
+| Deterministic reference backend | Available for API development and CI |
+| Qwen LoRA + pointer-head SLM | In development |
+| Calibrated released weights | Not yet available |
+
+The API and dataset converter are usable now:
 
 ```bash
 uv run xss-decision-data
@@ -134,6 +143,9 @@ uv run xss-decision-serve --port 8009
 
 See [`docs/DECISION_MODEL.md`](docs/DECISION_MODEL.md) for the request format, example client call,
 current status, and learned pointer-model milestones.
+
+> The included reference backend is a deterministic heuristic, not the trained SLM. Its purpose is
+> to make the API, clients, datasets, and tests usable while the pointer model is developed.
 
 ---
 
@@ -295,6 +307,64 @@ uv run mlx_lm.convert --hf-path ~/.cache/huggingface/hub/models--Qwen--Qwen3-8B/
 
 ## How to use
 
+### Try the XSS decision API
+
+Generate 68 decision records from the frozen development split:
+
+```bash
+uv run xss-decision-data \
+  --source benchmarks/frozen/dev.jsonl \
+  --output data/decision/dev.jsonl
+```
+
+Start the localhost-only API:
+
+```bash
+uv run xss-decision-serve --port 8009
+```
+
+In another terminal, submit an XSS decision request:
+
+```bash
+curl -s http://127.0.0.1:8009/v1/systemone \
+  -H 'content-type: application/json' \
+  -d '{
+    "state": {
+      "language": "javascript",
+      "code": "out.innerHTML = location.hash"
+    },
+    "questions": {
+      "vulnerable": {
+        "type": "noul",
+        "instructions": "Does untrusted input reach an executable XSS sink?"
+      },
+      "context": {
+        "type": "choice",
+        "instructions": "What context receives the untrusted value?",
+        "criteria": {
+          "dom_html": null,
+          "html_text": null,
+          "js_code": null,
+          "safe": null,
+          "unknown": null
+        }
+      }
+    }
+  }' | uv run python -m json.tool
+```
+
+The response contains a yes probability for `vulnerable` and a complete probability distribution
+for `context`. Check the loaded backend with:
+
+```bash
+curl -s http://127.0.0.1:8009/v1/models | uv run python -m json.tool
+```
+
+It currently reports `xss-decision-mock`. This is the reference backend; trained model weights will
+use a separate model name after they clear the frozen promotion gate.
+
+### Verify the browser-backed live system
+
 Start with the local acceptance suite. It exercises the scanner against bundled test applications and
 does not contact an external target:
 
@@ -318,7 +388,7 @@ uv run python -m live.ablation
 uv run xss build-benchmark                 # freeze XSSBench (dev/test-locked/generalization/nearmiss/adversarial)
 uv run xss corpus                          # write the verified knowledge corpus
 uv run xss sft --n 14                      # grounded teacher SFT data
-uv run xss train --iters 360 --out models/adapters/xss-v2 --sft data/training/sft_v2.jsonl
+uv run xss train --iters 360 --out models/adapters/xss-v2
 uv run python -m evaluation.run --backend mlx --adapter models/adapters/xss-v2 --out runs/E_v2
 uv run xss promote --cand runs/E_v2 --base runs/baseline_A_base   # frozen promotion gate
 uv run xss kev-route                       # live Kev-4B routing of the corpus
@@ -354,6 +424,7 @@ Review the generated evidence and Markdown report in
 
 ```
 xss_specialist/    core: ontology/schema, prompts, inference (MLX), repro, CLI
+xss_decision/      typed decision API, canonical XSS questions, data converter, reference backend
 knowledge/         verified XSS knowledge corpus (provenance-tagged)
 benchmarks/        case generator, frozen XSSBench, XSS-LiveBench-v2 spec
 retrieval/         TF-IDF RAG index + independent retrieval eval
@@ -369,7 +440,7 @@ live/              scope · crawler · probes · executor · oracle glue · sani
 docs/              ARCHITECTURE, THREAT_MODEL, LIVE_ASSESSMENT, XSSBENCH, CONTINUAL_LEARNING,
                    ROLLBACK, SECURITY_BOUNDARIES, KNOWN_LIMITATIONS, runbook, schema
 reports/           final research reports + live-assessment evidence & final report
-tests/             22 fast, model-free tests
+tests/             26 fast, model-free tests
 ```
 
 ---
