@@ -13,6 +13,11 @@ defense, and whether browser verification is required.
 The reference server currently uses a deterministic heuristic backend. It exists to stabilize and
 test the API while the learned pointer backend is developed; it is explicitly not a model release.
 
+An initial local checkpoint now exists at `models/xss-decision-0.8b-experimental/`. It validates the
+complete training and serialization path but is rejected for use: vulnerability accuracy is 0.544 on
+development and 0.027 on near-miss cases. Its tracked manifest is
+`registry/releases/xss-decision-0.8b-experimental.json`; the model files remain git-ignored.
+
 ```bash
 uv run xss-decision-serve --port 8009
 ```
@@ -58,4 +63,3 @@ establish execution.
 4. Fit temperature calibration on development data.
 5. Evaluate near-miss sanitizer binding, option-order sensitivity, calibration, and abstention.
 6. Connect the accepted checkpoint to the stable API and publish its model card and hashes.
-

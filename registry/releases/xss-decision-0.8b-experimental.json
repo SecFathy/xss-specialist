@@ -1,0 +1,36 @@
+{
+  "tag": "xss-decision-0.8b-experimental",
+  "status": "EXPERIMENTAL_REJECTED",
+  "release_eligible": false,
+  "reason": "Pipeline-validation checkpoint; near-miss vulnerability accuracy is 0.027.",
+  "created": "2026-09-27",
+  "base": "Qwen/Qwen3.5-0.8B-Base",
+  "architecture": {
+    "adapter": "LoRA",
+    "rank": 16,
+    "targets": "query/value projections",
+    "pointer_head_dim": 256
+  },
+  "training": {
+    "records": 68,
+    "typed_decisions": 340,
+    "epochs": 1,
+    "optimizer_steps": 9,
+    "seed": 0,
+    "wall_seconds": 102.5376238822937,
+    "peak_device_bytes": 3056120064,
+    "engine": "Kev (Apache-2.0; jaredpalmer/kev)"
+  },
+  "evaluation": {
+    "locked_test_read": false,
+    "dev": {"all_questions": 0.412, "vulnerable": 0.544},
+    "generalization": {"all_questions": 0.405, "vulnerable": 0.500},
+    "nearmiss": {"all_questions": 0.211, "vulnerable": 0.027},
+    "adversarial": {"all_questions": 0.350, "vulnerable": 0.500}
+  },
+  "artifacts": {
+    "adapter_model.safetensors": "sha256:0e1c11fc5caa3a37074b0a05755b3fb7184ff065642d5fc18a3fa47e8002f232",
+    "head.pt": "sha256:e2fde3bc9375f9f764b430d13035309ef18cfa6ad9da999214703da13a803b43",
+    "training_data": "sha256:2ce2d54afca4819257914a2abbf1b55bc9fd0991f875e6efbf549cea5eec6dd9"
+  }
+}

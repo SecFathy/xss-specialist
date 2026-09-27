@@ -131,7 +131,7 @@ and it can never declare a finding `CONFIRMED`; browser execution remains author
 | Frozen-benchmark decision-data converter | Available |
 | Local `/v1/systemone` server | Available |
 | Deterministic reference backend | Available for API development and CI |
-| Qwen LoRA + pointer-head SLM | In development |
+| Qwen3.5-0.8B LoRA + pointer-head checkpoint | Experimental; pipeline validated, gate rejected |
 | Calibrated released weights | Not yet available |
 
 The API and dataset converter are usable now:
@@ -146,6 +146,8 @@ current status, and learned pointer-model milestones.
 
 > The included reference backend is a deterministic heuristic, not the trained SLM. Its purpose is
 > to make the API, clients, datasets, and tests usable while the pointer model is developed.
+> A local experimental 0.8B checkpoint has also been trained, but it is not published or served by
+> default because it fails the near-miss gate. See the [checkpoint manifest](registry/releases/xss-decision-0.8b-experimental.json).
 
 ---
 

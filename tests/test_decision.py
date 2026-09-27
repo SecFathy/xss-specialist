@@ -2,7 +2,7 @@ import json
 
 from fastapi.testclient import TestClient
 
-from xss_decision.data import case_to_record
+from xss_decision.data import case_to_labelled_request, case_to_record
 from xss_decision.questions import DEFAULT_QUESTIONS
 from xss_decision.serve import app
 
@@ -24,6 +24,11 @@ def test_case_conversion_produces_pointer_labels():
     assert questions["vulnerable"]["label"] == 1
     assert questions["family"]["options"][questions["family"]["label"]] == "dom"
     assert questions["context"]["options"][questions["context"]["label"]] == "dom_html"
+
+    labelled = case_to_labelled_request(_case())
+    assert labelled["questions"]["vulnerable"]["label"] is True
+    assert labelled["questions"]["family"]["label"] == "dom"
+    assert labelled["questions"]["context"]["criteria"]["dom_html"] is None
 
 
 def test_decision_api_returns_typed_probabilities():
