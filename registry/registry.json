@@ -1,0 +1,141 @@
+{
+  "current": null,
+  "rollback_target": null,
+  "versions": [
+    {
+      "adapter_path": "models/adapters/xss-v1",
+      "adapter_sha256": "a3bee391984c73c354bf52c6e35de8ac0da7229cda45391387e3f57fb2114c4f",
+      "base_model": "models/qwen3-8b-4bit",
+      "base_revision": "b968826d",
+      "created": 1790521298.589626,
+      "dataset_sha256": "5e3829837b76f2896b654bc0d311c4283c27b5c20ec4c382bd54b50cea2995aa",
+      "deployment": "none",
+      "eval_results": {
+        "C": {
+          "adversarial": {
+            "abstention_rate": 0.0,
+            "accuracy_all": 0.625,
+            "accuracy_decided": 0.625,
+            "backend": "mlx:qwen3-8b-4bit+xss-v1",
+            "brier": 0.28343749999999995,
+            "confusion": {
+              "abstain": 0,
+              "fn": 3,
+              "fp": 0,
+              "tn": 4,
+              "tp": 1
+            },
+            "context_accuracy": 0.5,
+            "ece": 0.21250000000000008,
+            "f1_vuln": 0.4,
+            "false_negative_rate": 0.75,
+            "false_positive_rate": 0.0,
+            "latency_s_per_item": 2.151763379573822,
+            "n": 8,
+            "n_safe": 4,
+            "n_vulnerable": 4,
+            "precision_vuln": 1.0,
+            "rag": false,
+            "recall_vuln": 0.25,
+            "split": "adversarial",
+            "split_sha256": "c8f48e1fea061c18839c40cd50e491cd79d4679b2038f1771ce97d9549dce254"
+          },
+          "dev": {
+            "abstention_rate": 0.0,
+            "accuracy_all": 0.9411764705882353,
+            "accuracy_decided": 0.9411764705882353,
+            "backend": "mlx:qwen3-8b-4bit+xss-v1",
+            "brier": 0.05871323529411763,
+            "confusion": {
+              "abstain": 0,
+              "fn": 4,
+              "fp": 0,
+              "tn": 37,
+              "tp": 27
+            },
+            "context_accuracy": 1.0,
+            "ece": 0.10147058823529409,
+            "f1_vuln": 0.9310344827586207,
+            "false_negative_rate": 0.12903225806451613,
+            "false_positive_rate": 0.0,
+            "latency_s_per_item": 2.131033157601076,
+            "n": 68,
+            "n_safe": 37,
+            "n_vulnerable": 31,
+            "precision_vuln": 1.0,
+            "rag": false,
+            "recall_vuln": 0.8709677419354839,
+            "split": "dev",
+            "split_sha256": "ebc8b55adb5f58bf242d59834666bd7d2565e98aeb57a0982f1057bafa63378e"
+          },
+          "generalization": {
+            "abstention_rate": 0.0,
+            "accuracy_all": 0.5952380952380952,
+            "accuracy_decided": 0.5952380952380952,
+            "backend": "mlx:qwen3-8b-4bit+xss-v1",
+            "brier": 0.3046428571428571,
+            "confusion": {
+              "abstain": 0,
+              "fn": 17,
+              "fp": 0,
+              "tn": 21,
+              "tp": 4
+            },
+            "context_accuracy": 1.0,
+            "ece": 0.2333333333333333,
+            "f1_vuln": 0.32,
+            "false_negative_rate": 0.8095238095238095,
+            "false_positive_rate": 0.0,
+            "latency_s_per_item": 2.163353857539949,
+            "n": 42,
+            "n_safe": 21,
+            "n_vulnerable": 21,
+            "precision_vuln": 1.0,
+            "rag": false,
+            "recall_vuln": 0.19047619047619047,
+            "split": "generalization",
+            "split_sha256": "4dc46c422279e14fa481050b694fec256d08cfdb34e13b16fc7dc57ff36051b7"
+          },
+          "nearmiss": {
+            "abstention_rate": 0.0,
+            "accuracy_all": 0.02702702702702703,
+            "accuracy_decided": 0.02702702702702703,
+            "backend": "mlx:qwen3-8b-4bit+xss-v1",
+            "brier": 0.7035810810810811,
+            "confusion": {
+              "abstain": 0,
+              "fn": 36,
+              "fp": 0,
+              "tn": 1,
+              "tp": 0
+            },
+            "context_accuracy": 1.0,
+            "ece": 0.7729729729729731,
+            "f1_vuln": 0.0,
+            "false_negative_rate": 1.0,
+            "false_positive_rate": 0.0,
+            "latency_s_per_item": 2.1166202184316276,
+            "n": 37,
+            "n_safe": 1,
+            "n_vulnerable": 36,
+            "nearmiss": {
+              "anchor_correct": true,
+              "leakage_rate": 1.0,
+              "n_perturbed": 36
+            },
+            "precision_vuln": 0.0,
+            "rag": false,
+            "recall_vuln": 0.0,
+            "split": "nearmiss",
+            "split_sha256": "deb18bcafd7a722bbc5bf8c482468a5e8ced868b3bf4ec94f9ff73033289e179"
+          }
+        }
+      },
+      "kev_revision": "2026-09-24",
+      "notes": "gate REJECT: generalization regressed 0.762->0.595 (overfit), nearmiss leakage 1.0 not improved",
+      "parent": "base",
+      "promotion": "rejected",
+      "version": "v001"
+    }
+  ]
+}

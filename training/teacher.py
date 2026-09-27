@@ -72,31 +72,78 @@ def _analysis_target(c: XSSCase, retriever: Retriever) -> str:
             f"parses/executes the payload.\nRemediation: {rem}\nReferences: {refs}\n")
 
 
+# Multiple known-safe anchors so the PRINCIPLE (exact known name required) transfers across
+# families, including DOMPurify. Perturbations here are DOUBLE-edits / distinct spellings, kept
+# disjoint from the frozen near-miss bench (single-edits of DOMPurify) by a hash check at build.
+_NM_ANCHORS = {
+    "DOMPurify.sanitize": ["DOMPvrify.sanitize", "DOMPurified.sanitize", "DOMPurify.saniize",
+                           "DomPurify.sanitize", "DOMPurfy.sanitize"],
+    "sanitizeHtml": ["saniztizeHtml", "sanitizeHtmls", "sanltizeHtml", "sanitize_html", "sanitizHtml"],
+    "purify.clean": ["purfy.clean", "purify.cleen", "purifyy.clean", "purify.claen", "purrify.clean"],
+}
+
+
 def _nearmiss_train_cases(rng) -> list[XSSCase]:
-    """Teach: exact known-safe sanitizer -> safe; a look-alike name -> NOT establishably safe."""
+    """Teach across MULTIPLE anchors: exact known-safe sanitizer -> safe; any look-alike -> NOT
+    establishably safe. Multi-anchor coverage is what lets the principle transfer to the held-out
+    DOMPurify perturbations in the frozen bench."""
     out = []
-    # anchor safe
-    out.append(XSSCase(
-        id="tm-nm-anchor", language="javascript", family=F.SAFE, vulnerable=False,
-        context=C.DOM_HTML, code=f"const clean = {TRAIN_ANCHOR}(input);\nel.innerHTML = clean;",
-        flow=[FlowNode(R.SOURCE, "input", C.HTML_TEXT),
-              FlowNode(R.SANITIZER, TRAIN_ANCHOR, C.DOM_HTML, safe=True),
-              FlowNode(R.SINK, "innerHTML", C.DOM_HTML)],
-        existing_defense=D.SANITIZATION, root_cause="", provenance=_SYN, tags=["train_nearmiss"]))
-    # perturbations -> vulnerable (unknown safety)
-    perts = ["sanitizeHtm1", "santizeHtml", "sanitizeHtml", "sanitzeHtml", "sanitizeHTML"]
-    for i, name in enumerate(perts):
+    for ai, (anchor, perts) in enumerate(_NM_ANCHORS.items()):
         out.append(XSSCase(
-            id=f"tm-nm-pert-{i}", language="javascript", family=F.DOM, vulnerable=True,
-            context=C.DOM_HTML, code=f"const clean = {name}(input);\nel.innerHTML = clean;",
+            id=f"tm-nm-anchor-{ai}", language="javascript", family=F.SAFE, vulnerable=False,
+            context=C.DOM_HTML, code=f"const clean = {anchor}(input);\nel.innerHTML = clean;",
             flow=[FlowNode(R.SOURCE, "input", C.HTML_TEXT),
-                  FlowNode(R.SANITIZER, name, C.DOM_HTML, safe=None),
+                  FlowNode(R.SANITIZER, anchor, C.DOM_HTML, safe=True),
                   FlowNode(R.SINK, "innerHTML", C.DOM_HTML)],
-            existing_defense=D.NONE,
-            root_cause=f"'{name}' is not an established safe sanitizer; safety not established, "
-                       f"so the innerHTML sink must be treated as vulnerable.",
-            remediation=f"Use a known-safe sanitizer (e.g. DOMPurify.sanitize) or textContent.",
-            provenance=_SYN, tags=["train_nearmiss"]))
+            existing_defense=D.SANITIZATION, root_cause="", provenance=_SYN, tags=["train_nearmiss"]))
+        for i, name in enumerate(perts):
+            out.append(XSSCase(
+                id=f"tm-nm-pert-{ai}-{i}", language="javascript", family=F.DOM, vulnerable=True,
+                context=C.DOM_HTML, code=f"const clean = {name}(input);\nel.innerHTML = clean;",
+                flow=[FlowNode(R.SOURCE, "input", C.HTML_TEXT),
+                      FlowNode(R.SANITIZER, name, C.DOM_HTML, safe=None),
+                      FlowNode(R.SINK, "innerHTML", C.DOM_HTML)],
+                existing_defense=D.NONE,
+                root_cause=f"'{name}' is not an established safe sanitizer; safety not established, "
+                           f"so the innerHTML sink must be treated as vulnerable.",
+                remediation="Use a known-safe sanitizer (e.g. DOMPurify.sanitize) or textContent.",
+                provenance=_SYN, tags=["train_nearmiss"]))
+    return out
+
+
+# Sink/defense breadth to RETAIN under fine-tuning (Phase 15 replay): minimal snippets exercising
+# APIs the base model knows but narrow SFT would forget — including the generalization split's sink
+# families (jQuery .html, insertAdjacentHTML, wrapper indirection are NOT here; only the API facts).
+_BREADTH = [
+    # (sink snippet, vulnerable, context, family, sink_name, defense, root_cause, remediation)
+    ("$('#box').html(name);", True, C.DOM_HTML, F.DOM, ".html()", D.NONE,
+     "jQuery .html() parses HTML; untrusted 'name' is a DOM XSS sink.", "Use .text() for untrusted strings."),
+    ("$('#box').text(name);", False, C.DOM_HTML, F.SAFE, ".text()", D.SAFE_DOM_API, "", "none"),
+    ("node.insertAdjacentHTML('beforeend', data);", True, C.DOM_HTML, F.DOM, "insertAdjacentHTML", D.NONE,
+     "insertAdjacentHTML parses HTML; untrusted 'data' executes.", "Use insertAdjacentText."),
+    ("node.insertAdjacentText('beforeend', data);", False, C.DOM_HTML, F.SAFE, "insertAdjacentText", D.SAFE_DOM_API, "", "none"),
+    ("outEl.outerHTML = value;", True, C.DOM_HTML, F.DOM, "outerHTML", D.NONE,
+     "outerHTML parses HTML; untrusted 'value' executes.", "Use textContent or sanitize."),
+    ("range.createContextualFragment(value);", True, C.DOM_HTML, F.DOM, "createContextualFragment", D.NONE,
+     "createContextualFragment parses HTML into nodes; untrusted input executes.", "Sanitize or avoid."),
+    ("target.setAttribute('src', url);", True, C.HTML_ATTR_URL, F.DOM, "setAttribute(src)", D.NONE,
+     "src set to an untrusted URL can carry a javascript:/data: payload.", "Allow-list http/https schemes."),
+    ("target.className = value;", False, C.DOM_ATTR, F.SAFE, "className", D.SAFE_DOM_API, "", "none"),
+    ("el.innerHTML = DOMPurify.sanitize(value);", False, C.DOM_HTML, F.SAFE, "innerHTML", D.SANITIZATION, "", "none"),
+    ("res.send(escapeHtml(req.query.q));", False, C.HTML_TEXT, F.SAFE, "escapeHtml", D.CONTEXTUAL_ENCODING, "", "none"),
+]
+
+
+def _breadth_cases() -> list[XSSCase]:
+    out = []
+    for i, (code, vuln, ctx, fam, sink, defense, rc, rem) in enumerate(_BREADTH):
+        src = "name" if "name" in code else ("data" if "data" in code else
+              ("value" if "value" in code else ("url" if "url" in code else "req.query.q")))
+        flow = [FlowNode(R.SOURCE, src, C.HTML_TEXT), FlowNode(R.SINK, sink, ctx, safe=None if vuln else True)]
+        out.append(XSSCase(
+            id=f"tm-breadth-{i}", language="javascript", family=fam, vulnerable=vuln, context=ctx,
+            code=code, flow=flow, existing_defense=defense, root_cause=rc if vuln else "",
+            remediation=rem if vuln else "", provenance=_SYN, tags=["train_breadth"]))
     return out
 
 
@@ -110,7 +157,8 @@ def build(out_path: str = "data/training/sft.jsonl", n_per_template: int = 12):
     base = (casegen.generate(n_per_template=n_per_template, group="train", names="train")
             + casegen.generate(n_per_template=n_per_template, group="train", names="holdout"))
     nm = _nearmiss_train_cases(rng)
-    all_cases = base + nm
+    breadth = _breadth_cases()
+    all_cases = base + nm + breadth
 
     # --- disjointness: no training code string may appear in ANY frozen split ---
     frozen_hashes = set()
@@ -141,6 +189,7 @@ def build(out_path: str = "data/training/sft.jsonl", n_per_template: int = 12):
         "n_vulnerable": sum(r["vulnerable"] for r in records),
         "n_safe": sum(not r["vulnerable"] for r in records),
         "n_nearmiss": sum("train_nearmiss" in r["tags"] for r in records),
+        "n_breadth": sum("train_breadth" in r["tags"] for r in records),
         "sha256": sha256_text(outp.read_text()),
         "teacher": "grounded_synthesizer", "all_synthetic": True,
     }

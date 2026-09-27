@@ -83,6 +83,7 @@ if __name__ == "__main__":
     ap.add_argument("--layers", type=int, default=8)
     ap.add_argument("--rank", type=int, default=16)
     ap.add_argument("--out", default="models/adapters/xss-v1")
+    ap.add_argument("--sft", default="data/training/sft.jsonl")
     a = ap.parse_args()
-    train(adapter_out=a.out, iters=a.iters, batch=a.batch, lr=a.lr,
+    train(adapter_out=a.out, sft=a.sft, iters=a.iters, batch=a.batch, lr=a.lr,
           num_layers=a.layers, rank=a.rank)
