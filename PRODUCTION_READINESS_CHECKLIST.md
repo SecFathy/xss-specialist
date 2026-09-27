@@ -18,8 +18,9 @@
 - [x] Kill switch (halts learning, keeps inference/audit)
 - [x] Paired-bootstrap significance; locked test read-once discipline
 - [x] Reproducibility manifest
-- [ ] Candidate that clears the full gate (v2 pending)
+- [ ] Candidate that clears the full gate (v1/v2/v3 rejected on near-miss leakage; new approach required)
 - [ ] Real-codebase / repository-level evaluation at scale
 - [ ] Adversarial-evasion detection hardened
-- [ ] Live monitoring dashboard + operated canary
+- [x] Offline operational monitoring dashboard (summary metadata only; no sensitive evidence ingestion)
+- [ ] Operated canary with approved pilot traffic and recorded human review
 - [ ] Human-in-the-loop promotion operated in a pilot

@@ -1,6 +1,8 @@
 <div align="center">
 
-# 🛡️ xss-specialist
+<img src="docs/assets/banner.png" alt="XSS Specialist × KEV — Fast reasoning. Verified execution." width="100%">
+
+# xss-specialist
 
 ### A KEV-gated continual-learning XSS specialist SLM **+** an execution-authoritative live assessment system
 
@@ -21,7 +23,7 @@ browser oracle turn its reasoning into evidence-backed, hard-to-fool findings?*
 
 > **Authorized-use only.** This project assists **authorized** penetration testers, application-security
 > engineers, and researchers. It does **not** autonomously attack third-party systems, and every path
-> to active testing is gated behind explicit scope + authorization. See [Security & Boundaries](#-security--boundaries).
+> to active testing is gated behind explicit scope + authorization. See [Security & Boundaries](#security--boundaries).
 
 ---
 
@@ -29,19 +31,19 @@ browser oracle turn its reasoning into evidence-backed, hard-to-fool findings?*
 - [The one-paragraph version](#the-one-paragraph-version)
 - [Why this exists](#why-this-exists)
 - [Two systems, one repo](#two-systems-one-repo)
-- [Headline results](#-headline-results)
-- [The research: KEV-gated continual learning](#-the-research-kev-gated-continual-learning)
-- [The live system: execution-authoritative assessment](#-the-live-system-execution-authoritative-assessment)
-- [The near-miss problem (the interesting part)](#-the-near-miss-problem-the-interesting-part)
-- [Install](#-install)
-- [Usage](#-usage)
-- [Repository layout](#-repository-layout)
-- [Benchmarks & reproducibility](#-benchmarks--reproducibility)
-- [Security & boundaries](#-security--boundaries)
-- [Honest limitations](#-honest-limitations)
-- [Research questions, answered](#-research-questions-answered)
-- [Roadmap / blockers to production](#-roadmap--blockers-to-production)
-- [License & credits](#-license--credits)
+- [Headline results](#headline-results)
+- [The research: KEV-gated continual learning](#the-research-kev-gated-continual-learning)
+- [The live system: execution-authoritative assessment](#the-live-system-execution-authoritative-assessment)
+- [The near-miss problem (the interesting part)](#the-near-miss-problem-the-interesting-part)
+- [Quick Install](#quick-install)
+- [How to use](#how-to-use)
+- [Repository layout](#repository-layout)
+- [Benchmarks & reproducibility](#benchmarks--reproducibility)
+- [Security & boundaries](#security--boundaries)
+- [Honest limitations](#honest-limitations)
+- [Research questions, answered](#research-questions-answered)
+- [Roadmap / blockers to production](#roadmap--blockers-to-production)
+- [License & credits](#license--credits)
 
 ---
 
@@ -115,7 +117,7 @@ RAG holds *volatile* knowledge, training holds *stable reusable* knowledge, eval
 
 ---
 
-## 📊 Headline results
+## Headline results
 
 *All numbers are measured in this repo on frozen, deterministic benchmarks. The offline locked test
 was **never read** to build the live system.*
@@ -124,16 +126,16 @@ was **never read** to build the live system.*
 
 | Metric | v1 (emulated) | **v2** | Frozen gate |
 |---|---|---|---|
-| Precision | 0.935 | **0.941** | ≥ 0.90 ✅ |
-| Recall | 0.906 | **1.000** | ≥ 0.90 ✅ |
-| False-positive rate | 0.105 | **0.105** | ≤ 0.15 ✅ |
-| False-negative rate | 0.094 | **0.000** | ≤ 0.10 ✅ |
-| Confirmed-execution accuracy | — | **0.938** | ≥ 0.80 ✅ |
-| **Near-miss sanitizer leakage** | 0.00 | **0.00** | ≤ 0.05 ✅ |
-| Sanitizer false-safe rate | 0.00 | **0.00** | ≤ 0.05 ✅ |
-| Route / input discovery recall | — | **1.00 / 1.00** | ≥ 0.95 ✅ |
-| Control-plane injection breaches | — | **0 / 9** | = 0 ✅ |
-| Calibration (ECE) | — | **0.041** | ≤ 0.10 ✅ |
+| Precision | 0.935 | **0.941** | ≥ 0.90 (pass) |
+| Recall | 0.906 | **1.000** | ≥ 0.90 (pass) |
+| False-positive rate | 0.105 | **0.105** | ≤ 0.15 (pass) |
+| False-negative rate | 0.094 | **0.000** | ≤ 0.10 (pass) |
+| Confirmed-execution accuracy | — | **0.938** | ≥ 0.80 (pass) |
+| **Near-miss sanitizer leakage** | 0.00 | **0.00** | ≤ 0.05 (pass) |
+| Sanitizer false-safe rate | 0.00 | **0.00** | ≤ 0.05 (pass) |
+| Route / input discovery recall | — | **1.00 / 1.00** | ≥ 0.95 (pass) |
+| Control-plane injection breaches | — | **0 / 9** | = 0 (pass) |
+| Calibration (ECE) | — | **0.041** | ≤ 0.10 (pass) |
 
 **Paired bootstrap (v2 − v1, per-case accuracy):** **+0.059, 95% CI [+0.020, +0.108]** — significant,
 driven by recall (interaction-aware oracle + JS-code probes + stored-XSS correlation catch executions
@@ -159,7 +161,7 @@ is trivial reflected XSS.)*
 
 ---
 
-## 🔬 The research: KEV-gated continual learning
+## The research: KEV-gated continual learning
 
 The offline study asks whether a specialist SLM can be *safely* improved through continual learning.
 
@@ -174,7 +176,7 @@ adaptation · a real headless-browser oracle for label verification · a frozen 
 | Accuracy | 0.794 | 0.912 | 0.941 | **1.000** |
 | False-positive rate | 0.27 | 0.16 | **0.00** | **0.00** |
 | Execution-context accuracy | 0.52 | 0.39 | **1.00** | **1.00** |
-| Generalization (held-out shapes) | 0.762 | 0.833 | 0.595 ⚠️ | **0.905** |
+| Generalization (held-out shapes) | 0.762 | 0.833 | 0.595 | **0.905** |
 
 - Specialization **eliminated false positives** and made **execution-context classification perfect** —
   things RAG alone did *not* achieve.
@@ -190,7 +192,7 @@ filters pass.
 
 ---
 
-## 🌐 The live system: execution-authoritative assessment
+## The live system: execution-authoritative assessment
 
 The live layer turns analysis into **evidence**.
 
@@ -215,7 +217,7 @@ The live layer turns analysis into **evidence**.
 
 ---
 
-## 🎯 The near-miss problem (the interesting part)
+## The near-miss problem (the interesting part)
 
 Prior continual-learning research warned that **lexical near-miss entities cause knowledge leakage**.
 We built a dedicated benchmark and confirmed it — hard.
@@ -232,7 +234,7 @@ We built a dedicated benchmark and confirmed it — hard.
 | Specialist v1 (single-anchor near-miss training) | **1.00** |
 | Specialist v2 (multi-anchor) | **1.00** |
 | Specialist v3 (91-record generated, DOMPurify held out) | **1.00** |
-| **Live system (execution-authoritative)** | **0.00** ✅ |
+| **Live system (execution-authoritative)** | **0.00** |
 
 **The finding:** near-miss sanitizer leakage is *robustly resistant* to supervised fine-tuning at this
 scale — so the **frozen promotion gate rejected all three model candidates** (it refuses to ship a model
@@ -246,15 +248,18 @@ execution.**
 
 ---
 
-## 💾 Install
+## Quick Install
 
-Requires **macOS on Apple silicon** (MLX), Python ≥ 3.12, and [`uv`](https://github.com/astral-sh/uv).
+Prerequisites: **macOS on Apple silicon**, Python 3.12 or newer, Git, and
+[`uv`](https://docs.astral.sh/uv/getting-started/installation/). MLX model training and inference are
+currently Apple-silicon only.
 
 ```bash
-git clone <your-fork-url> xss-specialist && cd xss-specialist
-uv sync                                   # install dependencies
-uv run python -m playwright install chromium   # headless browser for the oracle
-uv run pytest -q                          # 22 model-free tests (~0.1s)
+git clone https://github.com/SecFathy/xss-specialist.git
+cd xss-specialist
+uv sync
+uv run python -m playwright install chromium
+uv run pytest -q
 ```
 
 The 8B base model is converted to 4-bit MLX locally (kept out of git):
@@ -268,7 +273,24 @@ uv run mlx_lm.convert --hf-path ~/.cache/huggingface/hub/models--Qwen--Qwen3-8B/
 
 ---
 
-## 🚀 Usage
+## How to use
+
+Start with the local acceptance suite. It exercises the scanner against bundled test applications and
+does not contact an external target:
+
+```bash
+uv run python -m live.livebench
+uv run python -m live.final_eval
+```
+
+A successful run confirms that the browser oracle and the frozen v2 acceptance gate work in your
+environment. Additional component checks are available with:
+
+```bash
+uv run python -m live.coverage
+uv run python -m live.robustness
+uv run python -m live.ablation
+```
 
 ### Offline research (specialist + benchmarks)
 
@@ -284,19 +306,6 @@ uv run xss adversarial                     # pipeline poisoning suite (0/15 brea
 uv run xss kill on|off|status              # continual-learning kill switch
 ```
 
-### Live assessment — local first (always)
-
-```bash
-# 1) Stand up the local vulnerable app + run the frozen local acceptance gate
-uv run python -m live.livebench            # XSS-LiveBench-v2 (102 cases)
-uv run python -m live.final_eval           # frozen paired eval vs v1; must PASS before external use
-
-# 2) Component checks
-uv run python -m live.coverage             # crawler route/input recall
-uv run python -m live.robustness           # control-plane injection suite (0 breaches)
-uv run python -m live.ablation             # which component drives quality
-```
-
 ### Live assessment — authorized external target
 
 External targets are **refused before any network access** unless: the local gate passed **and** you
@@ -310,8 +319,10 @@ uv run python -m live.pilot \
     --allowed-prefix /app/ --exclude /app/logout \
     --budget 300 --rate 3 \
     --authorized-external
-# → evidence + report under reports/live_assessments/ENG-2026-001/
 ```
+
+Review the generated evidence and Markdown report in
+`reports/live_assessments/ENG-2026-001/`.
 
 > Only test targets you are **explicitly authorized** to test (your own systems, an engagement with a
 > signed scope, a bug-bounty program's in-scope assets, or a public training sandbox like Google's
@@ -319,7 +330,7 @@ uv run python -m live.pilot \
 
 ---
 
-## 📁 Repository layout
+## Repository layout
 
 ```
 xss_specialist/    core: ontology/schema, prompts, inference (MLX), repro, CLI
@@ -343,7 +354,7 @@ tests/             22 fast, model-free tests
 
 ---
 
-## 🧪 Benchmarks & reproducibility
+## Benchmarks & reproducibility
 
 - **XSSBench** (offline): dev / **locked-test** / generalization / near-miss / adversarial splits, cut by
   *template* (not instance) so held-out sets are structurally novel; contamination-checked at freeze.
@@ -360,7 +371,7 @@ tests/             22 fast, model-free tests
 
 ---
 
-## 🔒 Security & boundaries
+## Security & boundaries
 
 - **Authorized-use only.** For pentesters, appsec engineers, code reviewers, and researchers working on
   systems they are permitted to test.
@@ -378,7 +389,7 @@ See `docs/SECURITY_BOUNDARIES.md` and `docs/THREAT_MODEL.md`.
 
 ---
 
-## ⚠️ Honest limitations
+## Honest limitations
 
 - **Benchmarks are synthetic and local** (102 live cases; small offline corpus). Numbers bound the
   *mechanism and failure modes*, not real-world performance on complex applications.
@@ -392,7 +403,7 @@ See `docs/SECURITY_BOUNDARIES.md` and `docs/THREAT_MODEL.md`.
 
 ---
 
-## ❓ Research questions, answered
+## Research questions, answered
 
 1. **Can a small specialist beat its base at XSS?** Yes on precision (FPR 0.27→0.00), execution-context
    (0.52→1.00), and accuracy; v2 also beats base on generalization (significant).
@@ -411,7 +422,7 @@ See `docs/SECURITY_BOUNDARIES.md` and `docs/THREAT_MODEL.md`.
 
 ---
 
-## 🗺️ Roadmap / blockers to production
+## Roadmap / blockers to production
 
 1. Real authorized-target pilot evidence (precision/recall on non-synthetic apps).
 2. Coverage on SPAs, authenticated flows, POST/JSON/header inputs, path parameters at scale.
@@ -424,7 +435,7 @@ See `docs/SECURITY_BOUNDARIES.md` and `docs/THREAT_MODEL.md`.
 
 ---
 
-## 📜 License & credits
+## License & credits
 
 - **Code, benchmarks, docs:** Apache-2.0 (see `LICENSE`).
 - **KEV / Kev-4B decision model:** used *frozen, zero-shot* as an external dependency, pinned by commit

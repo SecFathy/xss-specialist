@@ -32,6 +32,17 @@ precision/recall, false-positive rate, abstention, retrieval Recall@K, KEV score
 verification accept/reject, candidates, promotions/rejections, leakage + near-miss leakage,
 poisoning attempts, rollback events, latency p50/p95/p99, memory, drift.
 
+Generate the offline operational dashboard after local or authorized-pilot assessments:
+
+```bash
+uv run xss-monitor
+open reports/monitoring/dashboard.html
+```
+
+The dashboard reads `summary.json` and authorization/review metadata only. It deliberately excludes
+request logs, probe payloads, browser evidence, and page content. Dashboard availability does not
+constitute an operated canary; a canary requires approved pilot traffic and recorded human review.
+
 ## Deployment stages (Phase 22-23)
 shadow → 1% → 5% → 25% → 100%, human approval before first promotion, rollback triggers defined
 before each stage.

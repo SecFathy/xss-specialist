@@ -88,3 +88,30 @@ def test_classify_quoted_vs_unquoted():
     q = classify_context('<input value="MARK', "MARK")
     u = classify_context('<div class=MARK', "MARK")
     assert q == "html_attr" and u == "html_attr_unquoted"
+
+
+def test_monitoring_uses_summary_metadata_only(tmp_path):
+    import json
+    from live.monitoring import build, collect
+
+    assessment = tmp_path / "assessments" / "pilot-1"
+    assessment.mkdir(parents=True)
+    (assessment / "summary.json").write_text(json.dumps({
+        "target": "https://example.test/app/", "requests_made": 12,
+        "candidates_tested": 3, "confirmed": 1, "likely": 1,
+        "inconclusive": 1, "not_vulnerable": 0, "out_of_scope_blocked": 2,
+    }))
+    (assessment / "authorization.json").write_text(json.dumps({
+        "assessment_id": "PILOT-1", "operator_identity": "reviewer@example.test",
+        "authorization_acknowledged": True,
+    }))
+    (assessment / "HUMAN_REVIEW_REQUIRED.txt").write_text("required")
+    # Sensitive evidence must not be parsed or copied into the dashboard.
+    (assessment / "browser_evidence.jsonl").write_text('{"secret":"do-not-copy"}\n')
+
+    rows = collect(tmp_path / "assessments")
+    assert rows[0]["authorized_pilot"] and rows[0]["human_review_recorded"]
+    snapshot = build(tmp_path / "assessments", tmp_path / "monitoring")
+    assert snapshot["metrics"]["inconclusive_rate"] == 1 / 3
+    dashboard = (tmp_path / "monitoring" / "dashboard.html").read_text()
+    assert "PILOT-1" in dashboard and "do-not-copy" not in dashboard
