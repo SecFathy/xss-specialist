@@ -1,0 +1,263 @@
+{
+  "bench": "XSS-LiveBench-v2",
+  "by_category": {
+    "dom": {
+      "fn": 0,
+      "fnr": 0.0,
+      "fp": 0,
+      "fpr": 0.0,
+      "n": 15,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 2,
+      "tp": 13
+    },
+    "dom_multistep": {
+      "fn": 0,
+      "fnr": 0.0,
+      "fp": 0,
+      "fpr": null,
+      "n": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 0,
+      "tp": 1
+    },
+    "encoding": {
+      "fn": 0,
+      "fnr": 0.0,
+      "fp": 0,
+      "fpr": 0.0,
+      "n": 5,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 3,
+      "tp": 2
+    },
+    "fp_torture": {
+      "fn": 0,
+      "fnr": null,
+      "fp": 3,
+      "fpr": 0.1875,
+      "n": 16,
+      "precision": 0.0,
+      "recall": null,
+      "tn": 13,
+      "tp": 0
+    },
+    "reflected": {
+      "fn": 0,
+      "fnr": 0.0,
+      "fp": 1,
+      "fpr": 0.0625,
+      "n": 37,
+      "precision": 0.9545454545454546,
+      "recall": 1.0,
+      "tn": 15,
+      "tp": 21
+    },
+    "sanitizer": {
+      "fn": 0,
+      "fnr": 0.0,
+      "fp": 0,
+      "fpr": 0.0,
+      "n": 5,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 1,
+      "tp": 4
+    },
+    "sanitizer_nearmiss": {
+      "fn": 0,
+      "fnr": 0.0,
+      "fp": 0,
+      "fpr": null,
+      "n": 21,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 0,
+      "tp": 21
+    },
+    "stored": {
+      "fn": 2,
+      "fnr": 1.0,
+      "fp": 0,
+      "fpr": null,
+      "n": 2,
+      "precision": null,
+      "recall": 0.0,
+      "tn": 0,
+      "tp": 0
+    }
+  },
+  "by_context": {
+    "css": {
+      "fn": 0,
+      "fnr": 0.0,
+      "fp": 0,
+      "fpr": 0.0,
+      "n": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 1,
+      "tp": 1
+    },
+    "dom_attr": {
+      "fn": 0,
+      "fnr": null,
+      "fp": 0,
+      "fpr": 0.0,
+      "n": 1,
+      "precision": null,
+      "recall": null,
+      "tn": 1,
+      "tp": 0
+    },
+    "dom_html": {
+      "fn": 0,
+      "fnr": 0.0,
+      "fp": 0,
+      "fpr": 0.0,
+      "n": 36,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 2,
+      "tp": 34
+    },
+    "html_attr": {
+      "fn": 0,
+      "fnr": 0.0,
+      "fp": 0,
+      "fpr": 0.0,
+      "n": 18,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 7,
+      "tp": 11
+    },
+    "html_attr_url": {
+      "fn": 0,
+      "fnr": 0.0,
+      "fp": 0,
+      "fpr": 0.0,
+      "n": 4,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 2,
+      "tp": 2
+    },
+    "html_text": {
+      "fn": 2,
+      "fnr": 0.4,
+      "fp": 3,
+      "fpr": 0.15,
+      "n": 25,
+      "precision": 0.5,
+      "recall": 0.6,
+      "tn": 17,
+      "tp": 3
+    },
+    "js_code": {
+      "fn": 0,
+      "fnr": 0.0,
+      "fp": 1,
+      "fpr": 0.5,
+      "n": 9,
+      "precision": 0.875,
+      "recall": 1.0,
+      "tn": 1,
+      "tp": 7
+    },
+    "js_string": {
+      "fn": 0,
+      "fnr": 0.0,
+      "fp": 0,
+      "fpr": 0.0,
+      "n": 7,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 3,
+      "tp": 4
+    }
+  },
+  "by_xss_class": {
+    "dom": {
+      "fn": 0,
+      "fnr": 0.0,
+      "fp": 0,
+      "fpr": null,
+      "n": 39,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 0,
+      "tp": 39
+    },
+    "reflected": {
+      "fn": 0,
+      "fnr": 0.0,
+      "fp": 0,
+      "fpr": null,
+      "n": 23,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 0,
+      "tp": 23
+    },
+    "safe": {
+      "fn": 0,
+      "fnr": null,
+      "fp": 4,
+      "fpr": 0.10526315789473684,
+      "n": 38,
+      "precision": 0.0,
+      "recall": null,
+      "tn": 34,
+      "tp": 0
+    },
+    "stored": {
+      "fn": 2,
+      "fnr": 1.0,
+      "fp": 0,
+      "fpr": null,
+      "n": 2,
+      "precision": null,
+      "recall": 0.0,
+      "tn": 0,
+      "tp": 0
+    }
+  },
+  "coverage_funnel": {
+    "CONFIRMED": 58,
+    "LIKELY": 8,
+    "execution_attempted": 102,
+    "inputs_analyzed": 102,
+    "inputs_probed": 102,
+    "reflections_observed": 96
+  },
+  "failure_matrix": {
+    "CONTEXT_CLASSIFICATION_ERROR": 4,
+    "PROBE_GENERATION_ERROR": 2
+  },
+  "n": 102,
+  "overall": {
+    "confirmed_exec_accuracy": 0.90625,
+    "context_accuracy": 0.78125,
+    "fn": 2,
+    "fnr": 0.03125,
+    "fp": 4,
+    "fpr": 0.10526315789473684,
+    "n": 102,
+    "nearmiss_cases": 21,
+    "nearmiss_leakage": 0.0,
+    "precision": 0.9393939393939394,
+    "recall": 0.96875,
+    "sanitizer_false_safe_rate": 0.0,
+    "tn": 34,
+    "tp": 62
+  },
+  "requests_made": 274,
+  "requests_per_finding": 4.151515151515151,
+  "runtime_per_case_s": 1.47,
+  "runtime_s": 150.3,
+  "spec_sha256": "a763e254d2d23f8b47b857a014d2aeec8d4180c2a1d5d440267a48bb2f5ff56e"
+}

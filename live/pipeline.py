@@ -36,13 +36,10 @@ def classify_context(html_src: str, marker: str) -> str:
     tag_open = before.rfind("<")
     tag_close = before.rfind(">")
     if tag_open > tag_close:  # we're inside a tag
-        # quoted vs unquoted attribute
         seg = before[tag_open:]
         if re.search(r'=\s*"[^"]*$', seg) or re.search(r"=\s*'[^']*$", seg):
-            return "html_attr"
-        if re.search(r'=\s*[^"\'\s]*$', seg):
-            return "html_attr"
-        return "html_attr"
+            return "html_attr"            # quoted attribute value
+        return "html_attr_unquoted"       # unquoted attribute value
     if before.rstrip().endswith("<!--") or "<!--" in before and "-->" not in before[before.rfind("<!--"):]:
         return "html_comment"
     return "html_text"
@@ -65,7 +62,25 @@ def assess_candidate(candidate: dict, enforcer, fid: str, timeout_ms: int = 4000
             ctx = classify_context(win, mp.marker) if win else "html_text"
         candidate = {**candidate, "context": ctx}
 
-    # 3) execution probes (only if reflected)
+    # 3) derive bounded interactions from the reflection context (Phase 3)
+    if "interactions" not in candidate:
+        win = marker_ev.get("context_window", "") or ""
+        acts = []
+        m = re.search(r"on(\w+)\s*=", win)
+        if m:
+            ev_name = m.group(1).lower()
+            acts = {"mouseover": ["hover"], "focus": ["focus"], "click": ["click"],
+                    "mouseenter": ["hover"], "keyup": ["focus"], "keydown": ["focus"]}.get(
+                        ev_name, ["hover", "focus", "click"])
+        elif ctx in ("html_attr_url",) or "href=" in win or "src=" in win:
+            acts = ["click"]
+        elif ctx in ("html_attr",):
+            acts = ["hover", "focus", "click"]
+        elif ctx in ("dom_html", "dom_attr"):
+            acts = ["hashnav"]
+        candidate = {**candidate, "interactions": acts}
+
+    # 4) execution probes
     exec_evs = []
     if reflected:
         for pr in plan(candidate, "exec"):
@@ -73,6 +88,14 @@ def assess_candidate(candidate: dict, enforcer, fid: str, timeout_ms: int = 4000
             exec_evs.append(e)
             if e.get("executed"):
                 break  # one confirmed execution is enough
+    # code sinks (eval/Function/string-timer/script-element/event-handler) consume input as CODE and
+    # never reflect it — try a harmless JS-execution probe for DOM/query candidates even if nothing
+    # reflected. Confirmation is by the sentinel only.
+    if not any(e.get("executed") for e in exec_evs):
+        from live.probes import js_code_probe
+        jp = js_code_probe(candidate.get("delivery", "query"))
+        je = execute(candidate, jp, enforcer, timeout_ms)
+        exec_evs.append(je)
 
     # 4) sanitizer identity (from an observed name, if any)
     san_name = candidate.get("observed_sanitizer", "")

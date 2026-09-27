@@ -110,7 +110,8 @@ def verify_dom_case(case: dict, payload: str = PAYLOAD, timeout_ms: int = 3000) 
 
 def run_probe_on_url(url: str, marker: str, delivery: str = "query", param: str = "q",
                      timeout_ms: int = 4000, extra_headers: dict | None = None,
-                     cookies: list | None = None, raw_signature: str = "") -> dict:
+                     cookies: list | None = None, raw_signature: str = "",
+                     interactions: list | None = None) -> dict:
     """AUTHORITATIVE live execution check. Navigates a real (in-scope) URL with the probe already
     embedded in `url`, installs a per-marker sentinel (window.__X), and reports what the BROWSER
     actually did: reflection in HTML source, reflection in the live DOM, whether execution fired
@@ -126,7 +127,8 @@ def run_probe_on_url(url: str, marker: str, delivery: str = "query", param: str 
 
     result = {"requested_url": url, "final_url": None, "status": None,
               "reflected_html": False, "reflected_dom": False, "executed": False,
-              "raw_reflected": False, "console": [], "marker": marker}
+              "raw_reflected": False, "console": [], "marker": marker,
+              "interactions_performed": []}
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         try:
@@ -155,6 +157,34 @@ def run_probe_on_url(url: str, marker: str, delivery: str = "query", param: str 
                 result["reflected_html"] = marker in raw_body
                 result["reflected_dom"] = marker in dom_txt
                 result["executed"] = bool(page.evaluate(f"!!(window.__X && window.__X['{marker}'])"))
+                # Interaction-aware confirmation (Phase 3): if not yet executed, perform the bounded,
+                # context-derived interactions and re-check the sentinel. Non-destructive: only fires
+                # events on same-page elements / navigates the fragment; never submits off-target.
+                if not result["executed"] and interactions:
+                    for act in interactions:
+                        try:
+                            if act == "hover":
+                                page.eval_on_selector_all("*", "els=>els.forEach(e=>e.dispatchEvent("
+                                    "new MouseEvent('mouseover',{bubbles:true})))")
+                            elif act == "focus":
+                                page.eval_on_selector_all("[onfocus],[autofocus],input,button,a",
+                                    "els=>els.forEach(e=>{try{e.focus&&e.focus();e.dispatchEvent("
+                                    "new FocusEvent('focus',{bubbles:true}))}catch(_){}})")
+                            elif act == "click":
+                                page.eval_on_selector_all("[onclick],a,button,#lnk,#out,#t",
+                                    "els=>els.forEach(e=>{try{e.click&&e.click()}catch(_){}})")
+                            elif act == "hashnav":
+                                page.evaluate("window.dispatchEvent(new HashChangeEvent('hashchange'))")
+                            elif act == "submit":
+                                page.eval_on_selector_all("form",
+                                    "els=>els.forEach(f=>{try{f.requestSubmit?f.requestSubmit():f.submit()}catch(_){}})")
+                            result["interactions_performed"].append(act)
+                            page.wait_for_timeout(80)
+                            if page.evaluate(f"!!(window.__X && window.__X['{marker}'])"):
+                                result["executed"] = True
+                                break
+                        except Exception:
+                            pass
                 # dangerous signature must survive UNENCODED (and not backslash-escaped) in the raw
                 # body, or be present in the live DOM, to be considered live.
                 if raw_signature:

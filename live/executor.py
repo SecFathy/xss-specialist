@@ -33,7 +33,8 @@ def execute(candidate: dict, probe: Probe, enforcer: Enforcer, timeout_ms: int =
                           param=candidate.get("param", "q"), timeout_ms=timeout_ms,
                           extra_headers=enforcer.scope.extra_headers or None,
                           cookies=enforcer.scope.cookies or None,
-                          raw_signature=probe.raw_signature)
+                          raw_signature=probe.raw_signature,
+                          interactions=candidate.get("interactions"))
     enforcer.note_request(url, final_url=ev.get("final_url") or url, status=ev.get("status"),
                           kind=probe.kind)
     return {"blocked": False, "probe_kind": probe.kind, "probe_note": probe.note,

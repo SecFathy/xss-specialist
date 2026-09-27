@@ -1,0 +1,1027 @@
+{
+  "cases": [
+    {
+      "category": "reflected",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/html_text",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/html_text_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/attr_quoted",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/attr_quoted_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "hover",
+      "note": "",
+      "path": "/r/attr_unquoted",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/attr_unquoted_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "reflected",
+      "context": "js_string",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/js_string",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "js_string",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/js_string_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "reflected",
+      "context": "js_code",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/js_expr",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "js_code",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/js_expr_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr_url",
+      "delivery": "query",
+      "interaction": "click",
+      "note": "",
+      "path": "/r/url_href",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr_url",
+      "delivery": "query",
+      "interaction": "click",
+      "note": "",
+      "path": "/r/url_href_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "reflected",
+      "context": "css",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/css",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "css",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/css_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "reflected",
+      "context": "js_string",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/json_in_html",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "js_string",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/json_in_html_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "reflected",
+      "context": "js_code",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "script-data comment breakout",
+      "path": "/r/script_data",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "js_code",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/script_data_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "reflected",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/template",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "click",
+      "note": "",
+      "path": "/r/nested_attr_js",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "same input reflected 3x",
+      "path": "/r/multi_reflection",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/multi_reflection_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "dom",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "hash -> innerHTML",
+      "path": "/dom/innerHTML",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "dom",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "hash -> outerHTML",
+      "path": "/dom/outerHTML",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "dom",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "hash -> insertAdjacentHTML",
+      "path": "/dom/insertAdjacentHTML",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "dom",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "hash -> docwrite",
+      "path": "/dom/docwrite",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "dom",
+      "context": "js_code",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "hash -> eval",
+      "path": "/dom/eval",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "dom",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "",
+      "path": "/dom/textContent",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "dom",
+      "context": "dom_attr",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "",
+      "path": "/dom/setattr_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "dom_multistep",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "source->trim->wrap->innerHTML",
+      "path": "/dom/multistep",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "dom",
+      "context": "js_code",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "string timer",
+      "path": "/dom/settimeout",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "encoding",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "double-encoded input stays inert",
+      "path": "/enc/double",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "encoding",
+      "context": "dom_html",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "server-encoded then client textContent->innerHTML re-parses",
+      "path": "/enc/client_decode",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "encoding",
+      "context": "js_string",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/enc/js_unicode_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "encoding",
+      "context": "js_string",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "quote-escaped only; trailing backslash escapes the escape",
+      "path": "/enc/backslash_js",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "encoding",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "entities render as text",
+      "path": "/enc/entity_text_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "sanitizer",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "real escaping sanitizer",
+      "path": "/san/real_strip",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "sanitizer",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "fake DOMPurify no-op",
+      "path": "/san/fake_dompurify",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss sanitizer DOMPvrify (no-op)",
+      "path": "/san/nearmiss_DOMPvrify",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss sanitizer DOMPurfy (no-op)",
+      "path": "/san/nearmiss_DOMPurfy",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss sanitizer DomPurify (no-op)",
+      "path": "/san/nearmiss_DomPurify",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss sanitizer DOMPurify2 (no-op)",
+      "path": "/san/nearmiss_DOMPurify2",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss sanitizer D0MPurify (no-op)",
+      "path": "/san/nearmiss_D0MPurify",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss sanitizer DOMPurifyy (no-op)",
+      "path": "/san/nearmiss_DOMPurifyy",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "generic sanitize() no-op",
+      "path": "/san/other_pkg_sanitize",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "sanitized value concatenated with raw source",
+      "path": "/san/correct_then_unsafe",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer",
+      "context": "js_string",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "html-entity encode used for a JS-string context",
+      "path": "/san/wrong_context",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "sanitizer",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "sanitized then decoded back before sink",
+      "path": "/san/sanitize_then_decode",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "fp_torture",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "payload inside comment",
+      "path": "/fp/comment",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "fp_torture",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "encoded payload as text",
+      "path": "/fp/encoded_text",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "fp_torture",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "example in documentation",
+      "path": "/fp/docs",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "fp_torture",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "code snippet",
+      "path": "/fp/code_snippet",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "fp_torture",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "textarea content",
+      "path": "/fp/textarea",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "fp_torture",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "json data block",
+      "path": "/fp/json_text",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "fp_torture",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "non-executable text",
+      "path": "/fp/noexec_text",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "fp_torture",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "correctly sanitized",
+      "path": "/fp/sanitized_html",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "fp_torture",
+      "context": "html_text",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "safe textContent",
+      "path": "/fp/textcontent_js",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "fp_torture",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "dead code path",
+      "path": "/fp/dead_code",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "fp_torture",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "sink never called",
+      "path": "/fp/unreachable_sink",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "fp_torture",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "stripped then shown",
+      "path": "/fp/safe_after_transform",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "fp_torture",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "raw reflection but CSP blocks inline scripts",
+      "path": "/fp/csp_blocked",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "stored",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "submit step",
+      "path": "/store/submit",
+      "vulnerable": true,
+      "xss_class": "stored"
+    },
+    {
+      "category": "stored",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "retrieval/view step",
+      "path": "/store/view",
+      "vulnerable": true,
+      "xss_class": "stored"
+    },
+    {
+      "category": "dom",
+      "context": "dom_html",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "search -> innerHTML",
+      "path": "/dom/search_innerHTML",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "dom",
+      "context": "dom_html",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "search -> outerHTML",
+      "path": "/dom/search_outerHTML",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "dom",
+      "context": "dom_html",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "search -> insertAdjacentHTML",
+      "path": "/dom/search_insertAdjacentHTML",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "dom",
+      "context": "dom_html",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "search -> docwrite",
+      "path": "/dom/search_docwrite",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "dom",
+      "context": "js_code",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "search -> Function",
+      "path": "/dom/search_Function",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "dom",
+      "context": "js_code",
+      "delivery": "query",
+      "interaction": "click",
+      "note": "search -> eventhandler",
+      "path": "/dom/search_eventhandler",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "dom",
+      "context": "js_code",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "dynamic <script>.text",
+      "path": "/dom/script_construct",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/attrq_title",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/attrq_title_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/attrq_alt",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/attrq_alt_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/attrq_data-x",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/attrq_data-x_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/attrq_placeholder",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/attrq_placeholder_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/attrq_aria-label",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/attrq_aria-label_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "hover",
+      "note": "reflection into onmouseover",
+      "path": "/r/evattr_onmouseover",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "focus",
+      "note": "reflection into onfocus",
+      "path": "/r/evattr_onfocus",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr",
+      "delivery": "query",
+      "interaction": "click",
+      "note": "reflection into onclick",
+      "path": "/r/evattr_onclick",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr_url",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "img src",
+      "path": "/r/img_src",
+      "vulnerable": true,
+      "xss_class": "reflected"
+    },
+    {
+      "category": "reflected",
+      "context": "html_attr_url",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "",
+      "path": "/r/img_src_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss DOMPurlfy no-op",
+      "path": "/san/nm2_DOMPurlfy",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss DOMPur1fy no-op",
+      "path": "/san/nm2_DOMPur1fy",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss DMOPurify no-op",
+      "path": "/san/nm2_DMOPurify",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss DOMPurifyClean no-op",
+      "path": "/san/nm2_DOMPurifyClean",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss purifyDOM no-op",
+      "path": "/san/nm2_purifyDOM",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss DOMPurify_ no-op",
+      "path": "/san/nm2_DOMPurify_",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss _DOMPurify no-op",
+      "path": "/san/nm2__DOMPurify",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss DOMPurifi no-op",
+      "path": "/san/nm2_DOMPurifi",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss DOMSanitize no-op",
+      "path": "/san/nm2_DOMSanitize",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss sanitizeDOM no-op",
+      "path": "/san/nm2_sanitizeDOM",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss xssClean no-op",
+      "path": "/san/nm2_xssClean",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss htmlSanitize no-op",
+      "path": "/san/nm2_htmlSanitize",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss DOMpurify no-op",
+      "path": "/san/nm2_DOMpurify",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "sanitizer_nearmiss",
+      "context": "dom_html",
+      "delivery": "hash",
+      "interaction": "none",
+      "note": "near-miss domPurify no-op",
+      "path": "/san/nm2_domPurify",
+      "vulnerable": true,
+      "xss_class": "dom"
+    },
+    {
+      "category": "fp_torture",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "svg text encoded",
+      "path": "/fp/svg_text",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "fp_torture",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "encoded in two inert spots",
+      "path": "/fp/attr_name_pos",
+      "vulnerable": false,
+      "xss_class": "safe"
+    },
+    {
+      "category": "fp_torture",
+      "context": "html_text",
+      "delivery": "query",
+      "interaction": "none",
+      "note": "looks navigational, encoded",
+      "path": "/fp/meta_refresh_safe",
+      "vulnerable": false,
+      "xss_class": "safe"
+    }
+  ],
+  "n": 102,
+  "sha256": "a763e254d2d23f8b47b857a014d2aeec8d4180c2a1d5d440267a48bb2f5ff56e",
+  "version": "XSS-LiveBench-v2"
+}

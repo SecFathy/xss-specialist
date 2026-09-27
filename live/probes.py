@@ -47,11 +47,14 @@ def _exec_payloads(marker: str, context: str) -> list[tuple[str, str]]:
     out = []
     if context in ("html_text", "unknown", "dom_html"):
         out.append((f"<span>{marker}</span>{img}", "html_text img-onerror"))
-    if context in ("html_attr",):
-        # break out of an unquoted / quoted attribute then inject a handler
+    if context in ("html_attr", "html_attr_quoted", "unknown"):
+        # break out of a quoted attribute (needs an UNENCODED quote to work -> good discriminator)
+        out.append((f"\"><img src=x onerror=\"{hit}\">", "quoted(dq) attr breakout"))
+        out.append((f"'><img src=x onerror='{hit}'>", "quoted(sq) attr breakout"))
+    if context in ("html_attr_unquoted",):
+        # unquoted attribute: no metachar needed, an event handler alone injects
         out.append((f"{marker} onmouseover={hit} x", "unquoted attr handler"))
-        out.append((f"\"><img src=x onerror=\"{hit}\">", "quoted attr breakout"))
-    if context in ("js_string",):
+    if context in ("js_string", "unknown"):
         out.append((f"{marker}\";{hit};//", "js string breakout"))
         out.append((f"{marker}</script><img src=x onerror=\"{hit}\">", "script close + img"))
     if context in ("url", "html_attr_url"):
@@ -61,6 +64,16 @@ def _exec_payloads(marker: str, context: str) -> list[tuple[str, str]]:
     if not out:
         out.append((img, "default img-onerror"))
     return out
+
+
+def js_code_probe(delivery: str) -> "Probe":
+    """A harmless JS-EXECUTION probe for code sinks (eval/Function/string-timer/script-element/
+    event-handler) that consume input as code and do NOT reflect it. Confirmation is by the
+    sentinel, not reflection. Non-destructive: only sets window.__X[marker]."""
+    m = new_marker()
+    payload = f"window.__X['{m}']=1"
+    return Probe(marker=m, kind="exec", context="js_code", payload=payload, delivery=delivery,
+                 note="js-code execution probe", raw_signature="")
 
 
 def plan(candidate: dict, stage: str = "marker") -> list[Probe]:
