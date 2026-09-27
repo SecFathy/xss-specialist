@@ -1,0 +1,43 @@
+{
+  "components": {
+    "corpus_sha256": "18b0de1e139ecf6424f9417d81f15662dfe8ee0a5a6fbbe14e4d44472a02e250",
+    "kev": {
+      "adapter_sha256": "90e817356246e7f18bfa7ca3d31794cd4fbeb3332a66a84cb51d9ceae925f2b2",
+      "base": "Qwen/Qwen3.5-4B-Base",
+      "base_revision": "1001bb4d826a52d1f399e183466143f4da7b741b",
+      "frozen_zeroshot": true,
+      "kev_lib_commit": "6d02f5d066cd34958dfd15ffa5d2f6f0f4c21a63",
+      "kev_lib_repo": "github.com/jaredpalmer/kev",
+      "kev_model_path": "adaptive-ai/models/kev-4b",
+      "release_date": "2026-09-24"
+    },
+    "sft": "5e3829837b76f2896b654bc0d311c4283c27b5c20ec4c382bd54b50cea2995aa",
+    "xssbench": {
+      "adversarial": "c8f48e1fea061c18839c40cd50e491cd79d4679b2038f1771ce97d9549dce254",
+      "dev": "ebc8b55adb5f58bf242d59834666bd7d2565e98aeb57a0982f1057bafa63378e",
+      "generalization": "4dc46c422279e14fa481050b694fec256d08cfdb34e13b16fc7dc57ff36051b7",
+      "nearmiss": "deb18bcafd7a722bbc5bf8c482468a5e8ced868b3bf4ec94f9ff73033289e179",
+      "test": "36003c20c7c78a4a96ac95951f977970c8d00a6b48ec33b461d6646cab0c3c80"
+    },
+    "xssbench_locked": [
+      "test"
+    ]
+  },
+  "env": {
+    "git_commit": "3260b3b492f5cc85c93a8df9c0dc61214dfd8925",
+    "git_dirty": true,
+    "machine": "arm64",
+    "master_seed": 20260927,
+    "packages": {
+      "mlx-lm": "0.31.3",
+      "numpy": "2.5.3",
+      "playwright": "1.63.0",
+      "scikit-learn": "1.9.1",
+      "statsmodels": "0.15.0",
+      "transformers": "5.17.0"
+    },
+    "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "python": "3.13.14"
+  },
+  "master_seed": 20260927
+}
