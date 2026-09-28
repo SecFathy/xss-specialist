@@ -1,0 +1,135 @@
+{
+  "name": "XSS Decision 0.8B — Kev XSS Specialist v2 (Experimental)",
+  "tag": "xss-decision-0.8b-kev-specialist-v2",
+  "created": "2026-09-28",
+  "release_eligible": true,
+  "status": "RESEARCH_PREVIEW",
+  "research_gate": {
+    "status": "RESEARCH_ELIGIBLE",
+    "failed_thresholds": [],
+    "production_ready": false
+  },
+  "base_model": {
+    "id": "Qwen/Qwen3.5-0.8B-Base",
+    "revision": "dc7cdfe2ee4154fa7e30f5b51ca41bfa40174e68",
+    "license": "Apache-2.0"
+  },
+  "parent_checkpoint": {
+    "id": "jaredpalmer/kev-0.8b",
+    "revision": "9a45d25eb2ab761841196625383fa1dff0e56c1e",
+    "adapter_sha256": "9b908623acb162118575f4e7a94524f9c139c335be4bfb74d6cfceca01e1885a",
+    "head_sha256": "f400bd12802b2b105ae45d6b03774a158a3db4fccff42413734ddca2e5c920b6"
+  },
+  "architecture": {
+    "type": "Kev typed-decision model fine-tune",
+    "adapter": "LoRA",
+    "rank": 16,
+    "targets": "all supported dense and hybrid projection modules",
+    "placement": "full",
+    "pointer_head_dim": 256,
+    "trainable_parameters": 11300000
+  },
+  "training": {
+    "dataset": "local deterministic synthetic XSS decision v2",
+    "dataset_manifest_sha256": "bffa4bca7f5ff8f6a1425f38aed88a7682f064132251a89f080ccf2a8574b45d",
+    "dataset_generator_sha256": "92d6a2fd5121c3cfe7f5f0e19b925ab79b59eefc1f2dbf816a54e28d9f79d195",
+    "records": 1512,
+    "typed_decisions": 4536,
+    "epochs": 1,
+    "optimizer_steps": 189,
+    "seed": 0,
+    "learning_rate": 0.00002,
+    "batch_size": 8,
+    "gradient_accumulation": 1,
+    "dtype": "fp32",
+    "device": "Apple MPS",
+    "wall_seconds": 3111.56077003479,
+    "peak_device_bytes": 3364759040,
+    "peak_rss_bytes": 5225562112,
+    "engine": "Kev, Apache-2.0; jaredpalmer/kev"
+  },
+  "calibration": {
+    "temperature": 0.9267400610196151,
+    "split": "calibration",
+    "records": 216,
+    "checkpoint_bound": true,
+    "sha256": "5ffcfc4882b2afee3edc128c3ab2071600bf1236c683266332c02dfe27155df3"
+  },
+  "evaluation": {
+    "suite_manifest_sha256": "bffa4bca7f5ff8f6a1425f38aed88a7682f064132251a89f080ccf2a8574b45d",
+    "development": {
+      "n": 216,
+      "verdict_accuracy": 0.9722222222222222,
+      "vulnerability_recall": 1.0,
+      "false_safe_rate": 0.0,
+      "false_alarm_rate": 0.08333333333333333,
+      "unknown_recall": 1.0,
+      "unknown_overclaim_rate": 0.0,
+      "context_accuracy": 0.9768518518518519,
+      "defense_accuracy": 0.9583333333333334,
+      "permutation_flip_rates": {
+        "verdict": 0.0,
+        "context": 0.03333333333333333,
+        "defense": 0.0
+      }
+    },
+    "paired_template_group_bootstrap_vs_parent": {
+      "groups": 36,
+      "samples": 1000,
+      "seed": 0,
+      "verdict_accuracy_delta": 0.7268518518518519,
+      "verdict_accuracy_ci95": [
+        0.6712962962962963,
+        0.787037037037037
+      ],
+      "vulnerability_recall_delta": 0.9444444444444444,
+      "vulnerability_recall_ci95": [
+        0.8888888888888888,
+        0.9861111111111112
+      ]
+    },
+    "locked_test": {
+      "n": 216,
+      "scored_once_after_selection": true,
+      "verdict_accuracy": 0.9907407407407407,
+      "vulnerability_recall": 1.0,
+      "false_safe_rate": 0.0,
+      "false_alarm_rate": 0.027777777777777776,
+      "unknown_recall": 1.0,
+      "unknown_overclaim_rate": 0.0,
+      "context_accuracy": 0.9953703703703703,
+      "defense_accuracy": 0.9814814814814815,
+      "verdict_errors": {
+        "safe_predicted_vulnerable": 2,
+        "missed_vulnerable": 0
+      },
+      "test_split_sha256": "53a07ac13c5e2fd705feab913e3cfe044ca0c55eb3b3490e32a230d71f293cb1"
+    }
+  },
+  "artifacts": {
+    "adapter_model.safetensors": "sha256:84eea1185e6e4b776839f525f0fee763cc6ee5149ca66c9ccb2170725abb5cfa",
+    "head.pt": "sha256:b3158258853284ede8bb37468917086de6c1311b9df853c15231b386c8fcea68",
+    "adapter_config.json": "sha256:2365dc8bb5ce1f0fce956591671c15334b2ceeb7bcfe28089f6605637e8ec2ef",
+    "tokenizer.json": "sha256:06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+    "tokenizer_config.json": "sha256:8671bed7c852ce9e661be94f179a7b4ffd091c2a65aea0363e5501c20318ee45",
+    "chat_template.jinja": "sha256:273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+    "training_metrics.json": "sha256:c25613f7a8982622b75e7c13191dd30d618258a616c4f21ff5eccc9ca4c120c1",
+    "temperature.json": "sha256:5ffcfc4882b2afee3edc128c3ab2071600bf1236c683266332c02dfe27155df3",
+    "evaluation/development_report.json": "sha256:62afb7c27565d31f4440945e6cc2c56fa584e3f93ee57561943ebc31e969091b",
+    "evaluation/locked_test_report.json": "sha256:d8da9140713f75a5299b09ff3a8084bc8e62c833ed20f32438815c67a5f1fa9c",
+    "evaluation/comparison.json": "sha256:af2b0e5007712de4b28504c4224bd71650863fc3fd876d84b46a15805e032204"
+  },
+  "licenses": {
+    "adapter_and_pointer_head": "Apache-2.0",
+    "base_model": "Apache-2.0 (upstream license applies)",
+    "parent_model": "Apache-2.0 (upstream license applies)",
+    "synthetic_data": "Project-generated; no external code corpus included"
+  },
+  "limitations": [
+    "Research preview; not production-ready.",
+    "Evaluation uses a small synthetic JavaScript/HTML suite with repeated sink primitives and limited structural variation.",
+    "No independent real-repository, live application, PortSwigger, or browser-confirmed exploit evaluation.",
+    "A safe prediction is not proof of application safety; a vulnerable prediction is not a confirmed exploit.",
+    "The locked test has already been scored once for this checkpoint; do not use it for further tuning."
+  ]
+}

@@ -41,7 +41,8 @@ class HeuristicBackend:
             probs = _normalized(weights)
             if q.type == "choice":
                 answers[qid] = {"type": "choice", "choice": chosen,
-                                "confidence": round(max(probs), 6),
+                                "confidence": round(1.0 if len(probs) == 1 else
+                                                    (max(probs) - 1 / len(probs)) / (1 - 1 / len(probs)), 6),
                                 "probabilities": dict(zip(options, probs))}
             else:
                 score = sum(i * p for i, p in enumerate(probs))
@@ -50,7 +51,7 @@ class HeuristicBackend:
                                 "legend": {str(i): x for i, x in enumerate(options)},
                                 "probabilities": {str(i): p for i, p in enumerate(probs)}}
         elapsed = round((time.perf_counter() - started) * 1000, 3)
-        return {"model": request.model, "answers": answers,
+        return {"model": self.model_name, "answers": answers,
                 "usage": {"input_tokens": len(re.findall(r"\S+", text)),
                           "output_tokens": len(answers)}, "latency_ms": elapsed}
 
@@ -71,4 +72,3 @@ class HeuristicBackend:
         else:
             preferences = ["none", "safe", "no", "unknown"]
         return next((x for x in preferences if x in options), options[0])
-

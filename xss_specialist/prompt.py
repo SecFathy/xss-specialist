@@ -73,9 +73,9 @@ def parse(text: str) -> dict:
             fields[m.group(1).strip()] = m.group(2).strip()
 
     cls = fields.get("Classification", "").lower()
-    if "vul" in cls:
+    if cls == "vulnerable":
         out["classification"] = "vulnerable"
-    elif "safe" in cls or "not vul" in cls:
+    elif cls in {"safe", "not vulnerable", "not_vulnerable"}:
         out["classification"] = "safe"
     elif "cannot" in cls or "abstain" in cls or "unknown" in cls:
         out["classification"] = "abstain"

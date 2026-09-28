@@ -10,8 +10,10 @@ questions, and probability distributions instead of unsupported prose confidence
 questions. The initial question suite covers vulnerability, XSS family, execution context, existing
 defense, and whether browser verification is required.
 
-The reference server currently uses a deterministic heuristic backend. It exists to stabilize and
-test the API while the learned pointer backend is developed; it is explicitly not a model release.
+The server defaults to an explicitly non-learned reference backend. `--run` loads a real Kev
+checkpoint with no heuristic fallback. The [v2 improvement workflow](DECISION_MODEL_V2.md) adds
+three-way verdicts, browser-checked local fixtures, calibration-only temperature fitting,
+checkpoint-backed evaluation and pretrained-Kev warm starts.
 
 An initial local checkpoint now exists at `models/xss-decision-0.8b-experimental/`. It validates the
 complete training and serialization path but is rejected for use: vulnerability accuracy is 0.544 on
@@ -60,6 +62,6 @@ establish execution.
 1. Implement the Qwen backbone, rank-16 LoRA, and pointer head.
 2. Freeze group-disjoint decision train/development/test suites.
 3. Train 0.8B and 4B candidates without reading locked-test labels.
-4. Fit temperature calibration on development data.
+4. Fit temperature calibration on an independent calibration partition.
 5. Evaluate near-miss sanitizer binding, option-order sensitivity, calibration, and abstention.
 6. Connect the accepted checkpoint to the stable API and publish its model card and hashes.

@@ -8,3 +8,5 @@ node_modules/
 .DS_Store
 reports/live_assessments/google-xss-game-level1/
 reports/live_assessments/google-xss-game-level1-clean/
+data/decision/xss-v2-local*/
+reports/decision_v2/

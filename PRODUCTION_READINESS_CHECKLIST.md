@@ -24,3 +24,28 @@
 - [x] Offline operational monitoring dashboard (summary metadata only; no sensitive evidence ingestion)
 - [ ] Operated canary with approved pilot traffic and recorded human review
 - [ ] Human-in-the-loop promotion operated in a pilot
+
+## Kev-based decision model v2 (local research)
+
+This is separate from the historical generative-model and live-scanner checklist above.
+The scanner's successful probes do not establish learned-model accuracy.
+
+- [x] Real checkpoint-backed API with explicit identity; no heuristic fallback on load errors
+- [x] Three-way vulnerable/safe/unknown decision contract
+- [x] New versioned train/calibration/development/test suite; historical frozen files unchanged
+- [x] Related variants grouped; structural wrappers held out across partitions
+- [x] 2,160 synthetic JavaScript/HTML fixtures checked in a local browser with no conflicts
+- [x] Missing-helper cases admit both safe and unsafe completions; neither completion enters model input
+- [x] Pretrained Kev-0.8B adapter and pointer head loaded with matching architecture and pinned base
+- [x] Unchanged-parent development baseline measured before candidate training
+- [x] Calibration-only temperature fitting, bound to checkpoint hashes
+- [x] Model-only recall, false-safe/false-alarm, unknown-overclaim and permutation evaluation
+- [x] Paired template-group bootstrap and pre-training research gate
+- [ ] Trained candidate meets the independent development research gate
+- [ ] Selected candidate scored once on the locked test
+- [ ] Independent real-codebase coverage, including URL contexts and framework/server-side flows
+- [ ] Learned model drives an authorized live-lab workflow without manual/fallback attribution
+- [ ] Production-qualified model (synthetic scores alone are insufficient)
+
+Workflow: [Decision Model v2](docs/DECISION_MODEL_V2.md). Model files, generated datasets and
+evaluation artifacts remain local and git-ignored. No GitHub push or release is part of this cycle.

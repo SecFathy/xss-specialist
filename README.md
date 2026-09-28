@@ -146,8 +146,17 @@ current status, and learned pointer-model milestones.
 
 > The included reference backend is a deterministic heuristic, not the trained SLM. Its purpose is
 > to make the API, clients, datasets, and tests usable while the pointer model is developed.
-> A local experimental 0.8B checkpoint has also been trained, but it is not published or served by
-> default because it fails the near-miss gate. See the [checkpoint manifest](registry/releases/xss-decision-0.8b-experimental.json).
+> The original experimental 0.8B checkpoint is rejected and is not served by default.
+> See the [checkpoint manifest](registry/releases/xss-decision-0.8b-experimental.json).
+> A new local research workflow supports pretrained-Kev warm starts, three-way XSS decisions,
+> browser-checked fixtures, independent calibration, and checkpoint-backed serving.
+> See [the improvement workflow](docs/DECISION_MODEL_V2.md). Scanner success is separate from model accuracy.
+>
+> **Latest Kev specialist result:** the local XSS decision model reached 97.2% development
+> accuracy and 99.1% on its one-time 216-case synthetic locked test, with 100% vulnerable-case
+> recall on both. This is synthetic benchmark evidence, not a real-site or production guarantee;
+> full metrics, hashes, and limitations are in the [measured results](docs/DECISION_MODEL_V2.md#measured-local-run-2026-09-28).
+> Download the checkpoint package from the [XSS Decision 0.8B — Kev Specialist v2 experimental release](https://github.com/SecFathy/xss-specialist/releases/tag/xss-decision-0.8b-kev-specialist-v2).
 
 ---
 
@@ -311,7 +320,7 @@ uv run mlx_lm.convert --hf-path ~/.cache/huggingface/hub/models--Qwen--Qwen3-8B/
 
 ### Try the XSS decision API
 
-Generate 68 decision records from the frozen development split:
+For API development only, export the historical development cases. These are **not training data**:
 
 ```bash
 uv run xss-decision-data \
@@ -362,8 +371,19 @@ for `context`. Check the loaded backend with:
 curl -s http://127.0.0.1:8009/v1/models | uv run python -m json.tool
 ```
 
-It currently reports `xss-decision-mock`. This is the reference backend; trained model weights will
-use a separate model name after they clear the frozen promotion gate.
+Without `--run`, it reports `xss-decision-mock`. To explicitly load a learned checkpoint:
+
+```bash
+uv sync --extra decision
+uv run --extra decision xss-decision-serve \
+  --run jaredpalmer/kev-0.8b@9a45d25eb2ab761841196625383fa1dff0e56c1e \
+  --backend mlx --port 8009
+```
+
+This is pretrained Kev, not yet an accepted XSS specialist. `/v1/models` reports the actual
+checkpoint, base revision, hashes, backend, and temperature. There is no heuristic fallback if
+loading fails. For XSS specialization and local model-only evaluation, follow
+[Decision Model v2](docs/DECISION_MODEL_V2.md).
 
 ### Verify the browser-backed live system
 

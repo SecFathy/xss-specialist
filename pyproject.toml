@@ -19,11 +19,18 @@ dependencies = [
     "uvicorn>=0.30",
 ]
 
+[project.optional-dependencies]
+decision = ["kev @ git+https://github.com/jaredpalmer/kev.git@6d02f5d066cd34958dfd15ffa5d2f6f0f4c21a63"]
+
 [project.scripts]
 xss = "xss_specialist.cli:main"
 xss-monitor = "live.monitoring:main"
 xss-decision-data = "xss_decision.data:main"
 xss-decision-serve = "xss_decision.serve:main"
+xss-decision-evaluate = "xss_decision.evaluate:main"
+xss-decision-train = "xss_decision.train:main"
+xss-decision-build-v2 = "xss_decision.dataset:main"
+xss-decision-compare = "xss_decision.compare:main"
 
 [build-system]
 requires = ["uv_build>=0.9,<0.14"]
@@ -31,6 +38,7 @@ build-backend = "uv_build"
 
 [tool.uv.build-backend]
 module-root = ""
+module-name = ["xss_specialist", "xss_decision", "benchmarks", "consolidation", "evaluation", "kevgate", "knowledge", "live", "registry", "retrieval", "training", "verification"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

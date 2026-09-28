@@ -19,6 +19,11 @@ class Question(BaseModel):
             raise ValueError("score criteria must be an ordered list")
         if self.type != "noul" and not self.criteria:
             raise ValueError(f"{self.type} requires at least one criterion")
+        if self.type == "noul" and self.criteria is not None:
+            if not isinstance(self.criteria, dict) or set(self.criteria) - {"true", "false"}:
+                raise ValueError("noul criteria may only describe true and false")
+        if self.criteria and len(self.criteria) > 255:
+            raise ValueError("at most 255 criteria are supported")
         return self
 
 
@@ -46,4 +51,3 @@ def state_text(state: Any) -> str:
         return state
     import json
     return json.dumps(state, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
-
